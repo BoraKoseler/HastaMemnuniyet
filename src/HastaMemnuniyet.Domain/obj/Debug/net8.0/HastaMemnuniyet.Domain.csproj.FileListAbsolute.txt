@@ -10,3 +10,16 @@
 /home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/refint/HastaMemnuniyet.Domain.dll
 /home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.pdb
 /home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/ref/HastaMemnuniyet.Domain.dll
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\bin\Debug\net8.0\HastaMemnuniyet.Domain.deps.json
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\bin\Debug\net8.0\HastaMemnuniyet.Domain.dll
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\bin\Debug\net8.0\HastaMemnuniyet.Domain.pdb
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.csproj.AssemblyReference.cache
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.AssemblyInfoInputs.cache
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.AssemblyInfo.cs
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.sourcelink.json
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.dll
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\refint\HastaMemnuniyet.Domain.dll
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\HastaMemnuniyet.Domain.pdb
+C:\Users\Bora\OneDrive\Masaüstü\Bora\C#\HastaMemnuniyet\src\HastaMemnuniyet.Domain\obj\Debug\net8.0\ref\HastaMemnuniyet.Domain.dll

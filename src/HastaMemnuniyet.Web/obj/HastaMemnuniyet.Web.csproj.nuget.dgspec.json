@@ -1,33 +1,40 @@
 {
   "format": 1,
   "restore": {
-    "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/HastaMemnuniyet.Web.csproj": {}
+    "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Web\\HastaMemnuniyet.Web.csproj": {}
   },
   "projects": {
-    "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj": {
+    "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj",
         "projectName": "HastaMemnuniyet.Application",
-        "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/obj/",
+        "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj",
+        "packagesPath": "C:\\Users\\Bora\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bora\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj": {
-                "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj"
+              "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj": {
+                "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj"
               }
             }
           }
@@ -41,7 +48,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -62,26 +70,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/ubuntu/.dotnet/sdk/8.0.424/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.317/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj": {
+    "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj",
         "projectName": "HastaMemnuniyet.Domain",
-        "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/",
+        "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj",
+        "packagesPath": "C:\\Users\\Bora\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bora\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,7 +114,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -126,37 +142,44 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/ubuntu/.dotnet/sdk/8.0.424/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.317/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/HastaMemnuniyet.Infrastructure.csproj": {
+    "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\HastaMemnuniyet.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/HastaMemnuniyet.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\HastaMemnuniyet.Infrastructure.csproj",
         "projectName": "HastaMemnuniyet.Infrastructure",
-        "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/HastaMemnuniyet.Infrastructure.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/obj/",
+        "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\HastaMemnuniyet.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Bora\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bora\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj": {
-                "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj"
+              "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj": {
+                "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj"
               },
-              "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj": {
-                "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/HastaMemnuniyet.Domain.csproj"
+              "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj": {
+                "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Domain\\HastaMemnuniyet.Domain.csproj"
               }
             }
           }
@@ -170,7 +193,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -218,37 +242,44 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/ubuntu/.dotnet/sdk/8.0.424/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.317/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/HastaMemnuniyet.Web.csproj": {
+    "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Web\\HastaMemnuniyet.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/HastaMemnuniyet.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Web\\HastaMemnuniyet.Web.csproj",
         "projectName": "HastaMemnuniyet.Web",
-        "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/HastaMemnuniyet.Web.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/obj/",
+        "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Web\\HastaMemnuniyet.Web.csproj",
+        "packagesPath": "C:\\Users\\Bora\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bora\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj": {
-                "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Application/HastaMemnuniyet.Application.csproj"
+              "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj": {
+                "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Application\\HastaMemnuniyet.Application.csproj"
               },
-              "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/HastaMemnuniyet.Infrastructure.csproj": {
-                "projectPath": "/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Infrastructure/HastaMemnuniyet.Infrastructure.csproj"
+              "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\HastaMemnuniyet.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Bora\\OneDrive\\Masaüstü\\Bora\\C#\\HastaMemnuniyet\\src\\HastaMemnuniyet.Infrastructure\\HastaMemnuniyet.Infrastructure.csproj"
               }
             }
           }
@@ -262,7 +293,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -294,7 +326,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/ubuntu/.dotnet/sdk/8.0.424/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.317/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

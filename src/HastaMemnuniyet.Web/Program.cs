@@ -49,6 +49,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapGet("/", () => Results.Redirect("/Hesap/Giris"));
+
 // --- Cascade dropdown AJAX uç noktaları (davet oluşturma ekranı için) ---
 // Verilen hastaneye bağlı aktif birimleri JSON olarak döndürür.
 app.MapGet("/api/birimler", async (int hastaneId, IBirimServisi birimServisi) =>

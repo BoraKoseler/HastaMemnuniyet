@@ -26,6 +26,7 @@ public static class DependencyInjection
     public static IServiceCollection InfrastructureKatmaniniEkle(
         this IServiceCollection services,
         IConfiguration configuration)
+        
     {
         var baglantiDizesi = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("'DefaultConnection' bağlantı dizesi bulunamadı.");
