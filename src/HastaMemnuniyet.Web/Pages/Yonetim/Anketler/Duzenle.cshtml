@@ -1,0 +1,85 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Anketler.DuzenleModel
+@{
+    ViewData["Title"] = "Anket Düzenle";
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-clipboard2-check me-2"></i>Anket Düzenle</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+<div class="card shadow-sm form-kart">
+    <div class="card-body p-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"
+                 style="@(ViewData.ModelState.ErrorCount > 0 ? "" : "display:none;")"></div>
+
+            <input type="hidden" asp-for="Girdi.Id" />
+            <input type="hidden" asp-for="Girdi.SurumNo" />
+
+            <div class="mb-3">
+                <label asp-for="Girdi.Ad" class="form-label">Anket Adı</label>
+                <input asp-for="Girdi.Ad" class="form-control" />
+                <span asp-validation-for="Girdi.Ad" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Girdi.Aciklama" class="form-label">Açıklama</label>
+                <textarea asp-for="Girdi.Aciklama" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="Girdi.Aciklama" class="text-danger small"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Girdi.AnketTuru" class="form-label">Anket Türü</label>
+                    <select asp-for="Girdi.AnketTuru" asp-items="Model.TurSecenekleri" class="form-select"></select>
+                    <span asp-validation-for="Girdi.AnketTuru" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Girdi.TahminiSureDakika" class="form-label">Tahmini Süre (dakika)</label>
+                    <input asp-for="Girdi.TahminiSureDakika" class="form-control" type="number" min="0" max="240" />
+                    <span asp-validation-for="Girdi.TahminiSureDakika" class="text-danger small"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Girdi.GizlilikMetni" class="form-label">Gizlilik Metni</label>
+                <textarea asp-for="Girdi.GizlilikMetni" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Girdi.GizlilikMetni" class="text-danger small"></span>
+            </div>
+            <div class="mb-3 form-check">
+                <input asp-for="Girdi.AktifMi" class="form-check-input" />
+                <label asp-for="Girdi.AktifMi" class="form-check-label">Aktif</label>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i> Kaydet</button>
+                <a asp-page="Index" class="btn btn-outline-secondary">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm form-kart mt-3">
+    <div class="card-body p-4">
+        <h2 class="h5"><i class="bi bi-layers me-2"></i>Sürüm Yönetimi</h2>
+        <p class="text-muted small mb-3">
+            Mevcut sürüm: <strong>v@Model.Girdi.SurumNo</strong>.
+            Yeni sürüm oluşturduğunuzda anketin soruları kopyalanır, sürüm numarası bir artırılır
+            ve bu (önceki) sürüm pasifleştirilir.
+        </p>
+        <div class="d-flex gap-2">
+            <form method="post" asp-page-handler="SurumOlustur" asp-route-id="@Model.Girdi.Id"
+                  onsubmit="return confirm('Bu anketin sorularıyla birlikte yeni bir sürümü oluşturulacak ve mevcut sürüm pasifleştirilecek. Devam edilsin mi?');">
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="bi bi-plus-square me-1"></i> Yeni Sürüm Oluştur
+                </button>
+            </form>
+            <a asp-page="Surumler" asp-route-id="@Model.Girdi.Id" class="btn btn-outline-secondary">
+                <i class="bi bi-clock-history me-1"></i> Geçmiş Sürümler
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

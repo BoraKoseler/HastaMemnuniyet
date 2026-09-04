@@ -1,0 +1,64 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.QrKampanyalari.EkleModel
+@{
+    ViewData["Title"] = "Yeni QR Kampanyası";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-plus-circle me-2"></i>Yeni QR Kampanyası</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+<div class="form-kart">
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.Ad" class="form-label"></label>
+            <input asp-for="Girdi.Ad" class="form-control" />
+            <span asp-validation-for="Girdi.Ad" class="text-danger"></span>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Girdi.AnketId" class="form-label"></label>
+                <select asp-for="Girdi.AnketId" asp-items="Model.AnketSecenekleri" class="form-select">
+                    <option value="">Seçiniz...</option>
+                </select>
+                <span asp-validation-for="Girdi.AnketId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Girdi.HastaneId" class="form-label"></label>
+                <select asp-for="Girdi.HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+                    <option value="">Seçiniz...</option>
+                </select>
+                <span asp-validation-for="Girdi.HastaneId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Girdi.BirimId" class="form-label"></label>
+                <select asp-for="Girdi.BirimId" asp-items="Model.BirimSecenekleri" class="form-select">
+                    <option value="">(İsteğe bağlı)</option>
+                </select>
+                <span asp-validation-for="Girdi.BirimId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Girdi.DoktorId" class="form-label"></label>
+                <select asp-for="Girdi.DoktorId" asp-items="Model.DoktorSecenekleri" class="form-select">
+                    <option value="">(İsteğe bağlı)</option>
+                </select>
+                <span asp-validation-for="Girdi.DoktorId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Girdi.SonKullanmaTarihi" class="form-label"></label>
+                <input asp-for="Girdi.SonKullanmaTarihi" class="form-control" type="date" />
+                <span asp-validation-for="Girdi.SonKullanmaTarihi" class="text-danger"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Kaydet</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

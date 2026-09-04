@@ -1,0 +1,251 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = HastaMemnuniyet.Web
+build_property.RootNamespace = HastaMemnuniyet.Web
+build_property.ProjectDir = /home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Anket/Doldur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW5rZXQvRG9sZHVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Anket/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW5rZXQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Anket/Qr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW5rZXQvUXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Anket/SuresiDolmus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW5rZXQvU3VyZXNpRG9sbXVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Anket/Tesekkur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQW5rZXQvVGVzZWtrdXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Hesap/Cikis.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSGVzYXAvQ2lraXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Hesap/Giris.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSGVzYXAvR2lyaXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Hesap/YetkisizErisim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSGVzYXAvWWV0a2lzaXpFcmlzaW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Shared/_AnketLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19BbmtldExheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Shared/_Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19Ob3RpZmljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Aksiyonlar/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Ba3NpeW9ubGFyL0R1emVubGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Aksiyonlar/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Ba3NpeW9ubGFyL0VrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Aksiyonlar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Ba3NpeW9ubGFyL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9EdXplbmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9Fa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9TaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Sorular.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9Tb3J1bGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Anketler/Surumler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9BbmtldGxlci9TdXJ1bWxlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Birimler/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9CaXJpbWxlci9EdXplbmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Birimler/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9CaXJpbWxlci9Fa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Birimler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9CaXJpbWxlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Birimler/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9CaXJpbWxlci9TaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9EYXNoYm9hcmQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Davetler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9EYXZldGxlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Davetler/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9EYXZldGxlci9PbHVzdHVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/DenetimKayitlari/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9EZW5ldGltS2F5aXRsYXJpL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Doktorlar/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Eb2t0b3JsYXIvRHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Doktorlar/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Eb2t0b3JsYXIvRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Doktorlar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Eb2t0b3JsYXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Doktorlar/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Eb2t0b3JsYXIvU2lsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Hastaneler/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9IYXN0YW5lbGVyL0R1emVubGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Hastaneler/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9IYXN0YW5lbGVyL0VrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Hastaneler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9IYXN0YW5lbGVyL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Hastaneler/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9IYXN0YW5lbGVyL1NpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/KritikGeriBildirimler/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Lcml0aWtHZXJpQmlsZGlyaW1sZXIvRGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/KritikGeriBildirimler/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Lcml0aWtHZXJpQmlsZGlyaW1sZXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/KritikKurallari/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Lcml0aWtLdXJhbGxhcmkvRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/KritikKurallari/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Lcml0aWtLdXJhbGxhcmkvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Kullanicilar/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9LdWxsYW5pY2lsYXIvRHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Kullanicilar/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9LdWxsYW5pY2lsYXIvRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Kullanicilar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9LdWxsYW5pY2lsYXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/QrKampanyalari/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9RckthbXBhbnlhbGFyaS9Fa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/QrKampanyalari/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9RckthbXBhbnlhbGFyaS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Raporlar/AnahtarKelimeAnalizi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9SYXBvcmxhci9BbmFodGFyS2VsaW1lQW5hbGl6aS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Raporlar/DoktorKarnesi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9SYXBvcmxhci9Eb2t0b3JLYXJuZXNpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Raporlar/DonemselKarsilastirma.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9SYXBvcmxhci9Eb25lbXNlbEthcnNpbGFzdGlybWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/UstYonetimDashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9Vc3RZb25ldGltRGFzaGJvYXJkL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/VeriYonetimi/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9WZXJpWW9uZXRpbWkvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Yanitlar/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9ZYW5pdGxhci9EZXRheS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Yonetim/Yanitlar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvWW9uZXRpbS9ZYW5pdGxhci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Web/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-rqo6k7bxjq

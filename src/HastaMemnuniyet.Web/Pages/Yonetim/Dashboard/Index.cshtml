@@ -1,0 +1,241 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Dashboard.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-speedometer2 me-2"></i>Dashboard</h1>
+    <span class="text-muted small">
+        @Model.Istatistik.BaslangicTarihi.ToString("dd.MM.yyyy") - @Model.Istatistik.BitisTarihi.ToString("dd.MM.yyyy")
+    </span>
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Başlangıç Tarihi</label>
+        <input asp-for="Baslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Bitiş Tarihi</label>
+        <input asp-for="Bitis" class="form-control" type="date" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Filtrele</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Temizle</a>
+        <a asp-page="Index" asp-page-handler="RaporIndir" asp-route-Baslangic="@(Model.Baslangic?.ToString("yyyy-MM-dd"))" asp-route-Bitis="@(Model.Bitis?.ToString("yyyy-MM-dd"))" class="btn btn-success">
+            <i class="bi bi-file-earmark-excel me-1"></i> Excel Raporu İndir
+        </a>
+    </div>
+</form>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-mavi h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.ToplamAnketSayisi</div>
+                    <div class="kart-etiket">Aktif Anket</div>
+                </div>
+                <i class="bi bi-clipboard2-check kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-turkuaz h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.ToplamDavetSayisi</div>
+                    <div class="kart-etiket">Toplam Davet</div>
+                </div>
+                <i class="bi bi-envelope-paper kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-yesil h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.ToplamYanitSayisi</div>
+                    <div class="kart-etiket">Tamamlanan Yanıt</div>
+                </div>
+                <i class="bi bi-chat-square-heart kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">%@Model.Istatistik.YanitOrani.ToString("0.#")</div>
+                    <div class="kart-etiket">Yanıt Oranı</div>
+                </div>
+                <i class="bi bi-graph-up-arrow kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.KritikGeriBildirimSayisi</div>
+                    <div class="kart-etiket">Kritik Geri Bildirim</div>
+                </div>
+                <i class="bi bi-exclamation-triangle kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-mavi h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.AcikAksiyonSayisi</div>
+                    <div class="kart-etiket">Açık İyileştirme Aksiyonu</div>
+                </div>
+                <i class="bi bi-list-task kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Istatistik.GecikmisAksiyonSayisi</div>
+                    <div class="kart-etiket">Geciken Aksiyon</div>
+                </div>
+                <i class="bi bi-clock-history kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-star-fill text-warning me-3" style="font-size: 2rem;"></i>
+                <div>
+                    <div class="h4 mb-0">@Model.Istatistik.OrtalamaPuan.ToString("0.00") <span class="text-muted fs-6">/ 5</span></div>
+                    <div class="text-muted">Genel Ortalama Memnuniyet Puanı</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-hand-thumbs-up-fill text-primary me-3" style="font-size: 2rem;"></i>
+                <div class="flex-grow-1">
+                    @if (Model.Nps.VeriVarMi)
+                    {
+                        <div class="h4 mb-0">
+                            @Model.Nps.NpsSkoru
+                            <span class="badge bg-secondary fs-6 align-middle">@Model.Nps.Kategori</span>
+                        </div>
+                        <div class="text-muted">
+                            Net Tavsiye Skoru (NPS) &middot;
+                            <span class="text-success">%@Model.Nps.DestekciYuzdesi.ToString("0.#") destekçi</span>,
+                            <span class="text-danger">%@Model.Nps.KotuleyenYuzdesi.ToString("0.#") kötüleyen</span>
+                            <span class="d-block small">@Model.Nps.ToplamYanit tavsiye yanıtı</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="h4 mb-0 text-muted">—</div>
+                        <div class="text-muted">Net Tavsiye Skoru (NPS) &middot; bu dönem için tavsiye yanıtı yok</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0"><i class="bi bi-hospital me-2"></i>Hastane Bazlı Puanlar</h2>
+            </div>
+            @if (Model.Istatistik.HastanePuanlari.Count == 0)
+            {
+                <div class="card-body">
+                    <div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Hastane</th>
+                                <th class="text-center">Ortalama Puan</th>
+                                <th class="text-end">Yanıt Sayısı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var hastane in Model.Istatistik.HastanePuanlari)
+                            {
+                                <tr>
+                                    <td>@hastane.HastaneAdi</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">@hastane.OrtalamaPuan.ToString("0.00")</span>
+                                    </td>
+                                    <td class="text-end">@hastane.YanitSayisi</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0"><i class="bi bi-diagram-3 me-2"></i>Birim Bazlı Puanlar</h2>
+            </div>
+            @if (Model.Istatistik.BirimPuanlari.Count == 0)
+            {
+                <div class="card-body">
+                    <div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Birim</th>
+                                <th class="text-center">Ortalama Puan</th>
+                                <th class="text-end">Yanıt Sayısı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var birim in Model.Istatistik.BirimPuanlari)
+                            {
+                                <tr>
+                                    <td>
+                                        @birim.BirimAdi
+                                        @if (!string.IsNullOrWhiteSpace(birim.HastaneAdi))
+                                        {
+                                            <span class="text-muted small d-block">@birim.HastaneAdi</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-info text-dark">@birim.OrtalamaPuan.ToString("0.00")</span>
+                                    </td>
+                                    <td class="text-end">@birim.YanitSayisi</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

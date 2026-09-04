@@ -1,0 +1,241 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.UstYonetimDashboard.IndexModel
+@{
+    ViewData["Title"] = "Üst Yönetim Panosu";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-buildings me-2"></i>Üst Yönetim Panosu</h1>
+    <span class="text-muted small">
+        @Model.Ozet.BaslangicTarihi.ToString("dd.MM.yyyy") - @Model.Ozet.BitisTarihi.ToString("dd.MM.yyyy")
+    </span>
+</div>
+
+<div class="alert alert-info small">
+    <i class="bi bi-shield-lock me-1"></i>
+    Bu pano kurum geneli özet ve karşılaştırmalı verileri gösterir; hasta veya kişisel veri içermez.
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Başlangıç Tarihi</label>
+        <input asp-for="Baslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Bitiş Tarihi</label>
+        <input asp-for="Bitis" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Hastane</label>
+        <select asp-for="HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+            <option value="">Tüm Hastaneler</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Filtrele</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Temizle</a>
+    </div>
+</form>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-mavi h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.ToplamDavetSayisi</div>
+                    <div class="kart-etiket">Toplam Davet</div>
+                </div>
+                <i class="bi bi-envelope-paper kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-yesil h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.ToplamYanitSayisi</div>
+                    <div class="kart-etiket">Tamamlanan Yanıt</div>
+                </div>
+                <i class="bi bi-chat-square-heart kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-turkuaz h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">%@Model.Ozet.YanitOrani.ToString("0.#")</div>
+                    <div class="kart-etiket">Yanıt Oranı</div>
+                </div>
+                <i class="bi bi-graph-up-arrow kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.OrtalamaPuan.ToString("0.00")</div>
+                    <div class="kart-etiket">Ortalama Puan (/5)</div>
+                </div>
+                <i class="bi bi-star-fill kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.KritikGeriBildirimSayisi</div>
+                    <div class="kart-etiket">Kritik Geri Bildirim</div>
+                </div>
+                <i class="bi bi-exclamation-triangle kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-mavi h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.AcikAksiyonSayisi</div>
+                    <div class="kart-etiket">Açık İyileştirme Aksiyonu</div>
+                </div>
+                <i class="bi bi-list-task kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-turuncu h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Ozet.GecikmisAksiyonSayisi</div>
+                    <div class="kart-etiket">Geciken Aksiyon</div>
+                </div>
+                <i class="bi bi-clock-history kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0"><i class="bi bi-hospital me-2"></i>Hastane Karşılaştırması</h2>
+            </div>
+            @if (Model.HastaneKarsilastirma.Count == 0)
+            {
+                <div class="card-body"><div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div></div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Hastane</th>
+                                <th class="text-center">Ortalama Puan</th>
+                                <th class="text-end">Davet</th>
+                                <th class="text-end">Yanıt</th>
+                                <th class="text-end">Yanıt Oranı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var hastane in Model.HastaneKarsilastirma)
+                            {
+                                <tr>
+                                    <td>@hastane.HastaneAdi</td>
+                                    <td class="text-center"><span class="badge bg-primary">@hastane.OrtalamaPuan.ToString("0.00")</span></td>
+                                    <td class="text-end">@hastane.DavetSayisi</td>
+                                    <td class="text-end">@hastane.YanitSayisi</td>
+                                    <td class="text-end">%@hastane.YanitOrani.ToString("0.#")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0"><i class="bi bi-person-badge me-2"></i>Doktor Puanları</h2>
+                <span class="badge bg-secondary">Asgari örneklem: @Model.MinimumOrneklem yanıt</span>
+            </div>
+            @if (Model.DoktorPuanlari.Count == 0)
+            {
+                <div class="card-body">
+                    <div class="alert alert-info mb-0">
+                        Asgari örneklem eşiğini (@Model.MinimumOrneklem yanıt) karşılayan doktor bulunmuyor.
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Doktor</th>
+                                <th class="text-center">Ortalama Puan</th>
+                                <th class="text-end">Yanıt Sayısı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var doktor in Model.DoktorPuanlari)
+                            {
+                                <tr>
+                                    <td>@doktor.DoktorAdi</td>
+                                    <td class="text-center"><span class="badge bg-info text-dark">@doktor.OrtalamaPuan.ToString("0.00")</span></td>
+                                    <td class="text-end">@doktor.YanitSayisi</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0"><i class="bi bi-calendar3 me-2"></i>Son @Model.AylikTrend.Count Aylık Trend</h2>
+            </div>
+            @if (Model.AylikTrend.Count == 0)
+            {
+                <div class="card-body"><div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div></div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Ay</th>
+                                <th class="text-center">Ortalama Puan</th>
+                                <th class="text-end">Yanıt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trend in Model.AylikTrend)
+                            {
+                                <tr>
+                                    <td>@trend.Etiket</td>
+                                    <td class="text-center"><span class="badge bg-primary">@trend.OrtalamaPuan.ToString("0.00")</span></td>
+                                    <td class="text-end">@trend.YanitSayisi</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

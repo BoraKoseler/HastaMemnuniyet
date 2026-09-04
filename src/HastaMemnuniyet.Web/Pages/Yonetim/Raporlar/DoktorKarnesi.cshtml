@@ -1,0 +1,242 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Raporlar.DoktorKarnesiModel
+@{
+    ViewData["Title"] = "Doktor Karnesi";
+
+    string TrendRozeti(double yuzde)
+    {
+        if (yuzde > 0) return "bg-success";
+        if (yuzde < 0) return "bg-danger";
+        return "bg-secondary";
+    }
+    string TrendIkon(double yuzde)
+    {
+        if (yuzde > 0) return "bi-arrow-up-right";
+        if (yuzde < 0) return "bi-arrow-down-right";
+        return "bi-dash";
+    }
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-person-vcard me-2"></i>Doktor Karnesi</h1>
+</div>
+
+<div class="alert alert-info small">
+    <i class="bi bi-info-circle me-1"></i>
+    Bir doktorun seçilen dönemdeki performans karnesini gösterir: soru bazlı ortalamalar, genel ortalama,
+    NPS, güçlü/zayıf alanlar ve önceki döneme göre trend.
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-6 col-md-4">
+        <label class="form-label">Doktor</label>
+        <select asp-for="DoktorId" asp-items="Model.DoktorSecenekleri" class="form-select">
+            <option value="">Doktor seçiniz...</option>
+        </select>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Başlangıç Tarihi</label>
+        <input asp-for="Baslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Bitiş Tarihi</label>
+        <input asp-for="Bitis" class="form-control" type="date" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Getir</button>
+        <a asp-page="DoktorKarnesi" class="btn btn-outline-secondary">Temizle</a>
+        @if (Model.Karne is not null && Model.Karne.VeriVarMi)
+        {
+            <a asp-page="DoktorKarnesi" asp-page-handler="ExcelIndir"
+               asp-route-DoktorId="@Model.DoktorId"
+               asp-route-Baslangic="@(Model.Baslangic?.ToString("yyyy-MM-dd"))"
+               asp-route-Bitis="@(Model.Bitis?.ToString("yyyy-MM-dd"))"
+               class="btn btn-success">
+                <i class="bi bi-file-earmark-excel me-1"></i> Excel İndir
+            </a>
+        }
+    </div>
+</form>
+
+@if (!Model.DoktorId.HasValue)
+{
+    <div class="alert alert-secondary">
+        <i class="bi bi-arrow-up me-1"></i> Karneyi görüntülemek için bir doktor seçiniz.
+    </div>
+}
+else if (Model.Karne is null || !Model.Karne.VeriVarMi)
+{
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        Seçilen doktor ve dönem için değerlendirilebilir yanıt bulunamadı.
+    </div>
+}
+else
+{
+    var karne = Model.Karne;
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div>
+                    <h2 class="h4 mb-1">@karne.DoktorAdSoyad</h2>
+                    <div class="text-muted">
+                        @if (karne.Birimler.Count > 0)
+                        {
+                            <span><i class="bi bi-diagram-3 me-1"></i>@string.Join(", ", karne.Birimler)</span>
+                        }
+                    </div>
+                </div>
+                <div class="text-muted small text-end">
+                    @karne.BaslangicTarihi.ToString("dd.MM.yyyy") - @karne.BitisTarihi.ToString("dd.MM.yyyy")
+                </div>
+            </div>
+            @if (karne.DusukOrneklemUyarisi)
+            {
+                <div class="alert alert-warning mt-3 mb-0 small">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    Düşük örneklem uyarısı: yalnızca @karne.ToplamYanit yanıt bulunuyor
+                    (eşik: @karne.MinimumOrneklem). Sonuçlar temsil gücü açısından dikkatle yorumlanmalıdır.
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card istatistik-kart kart-turuncu h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="kart-deger">@karne.OrtalamaPuan.ToString("0.00")</div>
+                        <div class="kart-etiket">Ortalama Puan (/5)</div>
+                    </div>
+                    <i class="bi bi-star-fill kart-ikon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card istatistik-kart kart-yesil h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="kart-deger">@karne.ToplamYanit</div>
+                        <div class="kart-etiket">Toplam Yanıt</div>
+                    </div>
+                    <i class="bi bi-chat-square-heart kart-ikon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card istatistik-kart kart-mavi h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="kart-deger">@(karne.NpsSkoru.HasValue ? karne.NpsSkoru.Value.ToString() : "-")</div>
+                        <div class="kart-etiket">NPS</div>
+                    </div>
+                    <i class="bi bi-hand-thumbs-up kart-ikon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card istatistik-kart kart-turkuaz h-100">
+                <div class="card-body">
+                    <div class="kart-etiket mb-1">Önceki Döneme Göre</div>
+                    @if (karne.TrendYuzdesi.HasValue)
+                    {
+                        <span class="badge @TrendRozeti(karne.TrendYuzdesi.Value)">
+                            <i class="bi @TrendIkon(karne.TrendYuzdesi.Value) me-1"></i>%@karne.TrendYuzdesi.Value.ToString("0.#")
+                        </span>
+                        <div class="small text-muted mt-1">önce @karne.OncekiDonemOrtalamaPuan!.Value.ToString("0.00")</div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Kıyas verisi yok</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100 border-success">
+                <div class="card-header bg-success-subtle">
+                    <h2 class="h5 mb-0 text-success"><i class="bi bi-hand-thumbs-up me-2"></i>Güçlü Alanlar</h2>
+                </div>
+                @if (karne.GucluAlanlar.Count == 0)
+                {
+                    <div class="card-body"><div class="text-muted mb-0">Yeterli veri yok.</div></div>
+                }
+                else
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var alan in karne.GucluAlanlar)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@alan.SoruMetni</span>
+                                <span class="badge bg-success rounded-pill">@alan.Ortalama.ToString("0.00")</span>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100 border-danger">
+                <div class="card-header bg-danger-subtle">
+                    <h2 class="h5 mb-0 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>Zayıf Alanlar</h2>
+                </div>
+                @if (karne.ZayifAlanlar.Count == 0)
+                {
+                    <div class="card-body"><div class="text-muted mb-0">Yeterli veri yok.</div></div>
+                }
+                else
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var alan in karne.ZayifAlanlar)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@alan.SoruMetni</span>
+                                <span class="badge bg-danger rounded-pill">@alan.Ortalama.ToString("0.00")</span>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h2 class="h5 mb-0"><i class="bi bi-list-check me-2"></i>Soru Bazlı Ortalamalar</h2>
+        </div>
+        @if (karne.SoruBazliOrtalamalar.Count == 0)
+        {
+            <div class="card-body"><div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div></div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Soru</th>
+                            <th>Kategori</th>
+                            <th class="text-center">Ortalama</th>
+                            <th class="text-end">Yanıt Sayısı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var soru in karne.SoruBazliOrtalamalar)
+                        {
+                            <tr>
+                                <td>@soru.SoruMetni</td>
+                                <td>@(string.IsNullOrWhiteSpace(soru.Kategori) ? "-" : soru.Kategori)</td>
+                                <td class="text-center"><span class="badge bg-primary">@soru.Ortalama.ToString("0.00")</span></td>
+                                <td class="text-end">@soru.YanitSayisi</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+}

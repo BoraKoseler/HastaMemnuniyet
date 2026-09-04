@@ -1,0 +1,211 @@
+/* ============================================================
+   Hasta Memnuniyet Sistemi — Genel stiller (Bootstrap 5 üzeri)
+   ============================================================ */
+
+:root {
+    --hm-primary: #0d6efd;
+    --hm-primary-dark: #0a58ca;
+}
+
+html {
+    font-size: 15px;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.navbar-brand {
+    letter-spacing: .3px;
+}
+
+/* Tablo başlıkları */
+.table > thead {
+    background-color: #f1f3f5;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Sayfa başlığı bölümü */
+.sayfa-baslik {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+}
+
+.sayfa-baslik h1,
+.sayfa-baslik h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* Form kartları */
+.form-kart {
+    max-width: 720px;
+}
+
+/* ============================================================
+   Dashboard kartları
+   ============================================================ */
+.istatistik-kart {
+    border: none;
+    border-radius: .75rem;
+    color: #fff;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+}
+
+.istatistik-kart .kart-ikon {
+    font-size: 2.25rem;
+    opacity: .85;
+}
+
+.istatistik-kart .kart-deger {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.istatistik-kart .kart-etiket {
+    font-size: .9rem;
+    opacity: .95;
+}
+
+.kart-mavi { background: linear-gradient(135deg, #4e73df, #224abe); }
+.kart-yesil { background: linear-gradient(135deg, #1cc88a, #13855c); }
+.kart-turkuaz { background: linear-gradient(135deg, #36b9cc, #258391); }
+.kart-turuncu { background: linear-gradient(135deg, #f6a821, #dd8a0b); }
+
+/* ============================================================
+   Anket doldurma (anonim) sayfaları — minimal layout
+   ============================================================ */
+.anket-body {
+    background: linear-gradient(160deg, #eef2f7 0%, #dbe4f0 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.anket-ust-bar {
+    background: var(--hm-primary);
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 .125rem .5rem rgba(0, 0, 0, .15);
+}
+
+.anket-marka {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.anket-icerik {
+    flex: 1 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 760px;
+}
+
+.anket-footer {
+    flex-shrink: 0;
+}
+
+.anket-kart {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .12);
+}
+
+.soru-blok {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.soru-blok:last-child {
+    border-bottom: none;
+}
+
+.soru-metni {
+    font-weight: 600;
+    margin-bottom: .75rem;
+}
+
+.zorunlu-yildiz {
+    color: #dc3545;
+    margin-left: .15rem;
+}
+
+/* ============================================================
+   Yıldız puanlama bileşeni
+   ============================================================ */
+.yildiz-puanlama {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: .25rem;
+    font-size: 2rem;
+}
+
+.yildiz-puanlama input[type="radio"] {
+    display: none;
+}
+
+.yildiz-puanlama label {
+    color: #d0d0d0;
+    cursor: pointer;
+    transition: color .15s ease-in-out;
+}
+
+.yildiz-puanlama label:hover,
+.yildiz-puanlama label:hover ~ label,
+.yildiz-puanlama input[type="radio"]:checked ~ label {
+    color: #ffc107;
+}
+
+/* Puanlama radio (yıldız dışı sayısal) */
+.puan-secenek {
+    display: inline-flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.puan-secenek .btn-check:checked + .btn {
+    background-color: var(--hm-primary);
+    color: #fff;
+}
+
+/* Karakter sayacı */
+.karakter-sayac {
+    font-size: .8rem;
+    color: #6c757d;
+    text-align: right;
+}
+
+/* Soru yönetimi — dinamik alanlar başlangıçta gizli */
+.tip-alan {
+    display: none;
+}
+
+/* Seçenek satırı */
+.secenek-satiri {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+
+/* Responsive küçük düzenlemeler */
+@media (max-width: 576px) {
+    .sayfa-baslik h1,
+    .sayfa-baslik h2 {
+        font-size: 1.35rem;
+    }
+
+    .yildiz-puanlama {
+        font-size: 1.6rem;
+    }
+}

@@ -1,0 +1,66 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.DenetimKayitlari.IndexModel
+@{
+    ViewData["Title"] = "Denetim Kayıtları";
+}
+
+<div class="sayfa-baslik">
+    <h1>Denetim Kayıtları</h1>
+    <p>Sistemde gerçekleştirilen kritik işlemlerin izlenebilirlik kayıtları.</p>
+</div>
+
+<form method="get" class="form-kart">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label" for="Islem">İşlem Türü</label>
+            <input type="text" class="form-control" id="Islem" name="Islem" value="@Model.Islem" placeholder="Örn. Giris, AksiyonOlustur" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="KullaniciAdi">Kullanıcı</label>
+            <input type="text" class="form-control" id="KullaniciAdi" name="KullaniciAdi" value="@Model.KullaniciAdi" placeholder="Kullanıcı adı" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Filtrele</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">Temizle</a>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive mt-4">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Kullanıcı</th>
+                <th>İşlem</th>
+                <th>Tablo</th>
+                <th>Kayıt No</th>
+                <th>Detay</th>
+                <th>IP Adresi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Kayitlar.Count == 0)
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">Kayıt bulunamadı.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var kayit in Model.Kayitlar)
+                {
+                    <tr>
+                        <td>@kayit.Tarih.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@(string.IsNullOrEmpty(kayit.KullaniciAdi) ? "-" : kayit.KullaniciAdi)</td>
+                        <td><span class="badge bg-secondary">@kayit.Islem</span></td>
+                        <td>@(string.IsNullOrEmpty(kayit.Tablo) ? "-" : kayit.Tablo)</td>
+                        <td>@(string.IsNullOrEmpty(kayit.KayitId) ? "-" : kayit.KayitId)</td>
+                        <td>@(string.IsNullOrEmpty(kayit.Detay) ? "-" : kayit.Detay)</td>
+                        <td>@(string.IsNullOrEmpty(kayit.IpAdresi) ? "-" : kayit.IpAdresi)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

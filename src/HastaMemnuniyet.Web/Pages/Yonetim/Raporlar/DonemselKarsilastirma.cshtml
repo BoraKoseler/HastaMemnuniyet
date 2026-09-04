@@ -1,0 +1,165 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Raporlar.DonemselKarsilastirmaModel
+@{
+    ViewData["Title"] = "Dönemsel Karşılaştırma";
+
+    string DegisimRozeti(double yuzde)
+    {
+        if (yuzde > 0) return "bg-success";
+        if (yuzde < 0) return "bg-danger";
+        return "bg-secondary";
+    }
+    string DegisimIkon(double yuzde)
+    {
+        if (yuzde > 0) return "bi-arrow-up-right";
+        if (yuzde < 0) return "bi-arrow-down-right";
+        return "bi-dash";
+    }
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-arrow-left-right me-2"></i>Dönemsel Karşılaştırma</h1>
+</div>
+
+<div class="alert alert-info small">
+    <i class="bi bi-info-circle me-1"></i>
+    İki dönemin memnuniyet göstergelerini karşılaştırır. Varsayılan olarak bu ay ile geçen ay kıyaslanır.
+    Değişim yüzdeleri, güncel dönemin önceki döneme göre farkını gösterir.
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Önceki Dönem Başlangıç</label>
+        <input asp-for="OncekiBaslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Önceki Dönem Bitiş</label>
+        <input asp-for="OncekiBitis" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Güncel Dönem Başlangıç</label>
+        <input asp-for="GuncelBaslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Güncel Dönem Bitiş</label>
+        <input asp-for="GuncelBitis" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Hastane</label>
+        <select asp-for="HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+            <option value="">Tüm Hastaneler</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Karşılaştır</button>
+        <a asp-page="DonemselKarsilastirma" class="btn btn-outline-secondary">Temizle</a>
+    </div>
+</form>
+
+<div class="d-flex justify-content-between text-muted small mb-3 flex-wrap gap-2">
+    <span><i class="bi bi-clock-history me-1"></i>Önceki: @Model.Sonuc.OncekiBaslangic.ToString("dd.MM.yyyy") - @Model.Sonuc.OncekiBitis.ToString("dd.MM.yyyy")</span>
+    <span><i class="bi bi-calendar-check me-1"></i>Güncel: @Model.Sonuc.GuncelBaslangic.ToString("dd.MM.yyyy") - @Model.Sonuc.GuncelBitis.ToString("dd.MM.yyyy")</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="kart-etiket mb-2"><i class="bi bi-star-fill me-1"></i>Ortalama Puan (/5)</div>
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <span class="h3 mb-0">@Model.Sonuc.GuncelOrtalamaPuan.ToString("0.00")</span>
+                    <span class="text-muted">önce @Model.Sonuc.OncekiOrtalamaPuan.ToString("0.00")</span>
+                </div>
+                <span class="badge @DegisimRozeti(Model.Sonuc.OrtalamaPuanDegisimYuzdesi) mt-2">
+                    <i class="bi @DegisimIkon(Model.Sonuc.OrtalamaPuanDegisimYuzdesi) me-1"></i>%@Model.Sonuc.OrtalamaPuanDegisimYuzdesi.ToString("0.#")
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="kart-etiket mb-2"><i class="bi bi-chat-square-heart me-1"></i>Yanıt Sayısı</div>
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <span class="h3 mb-0">@Model.Sonuc.GuncelYanitSayisi</span>
+                    <span class="text-muted">önce @Model.Sonuc.OncekiYanitSayisi</span>
+                </div>
+                <span class="badge @DegisimRozeti(Model.Sonuc.YanitSayisiDegisimYuzdesi) mt-2">
+                    <i class="bi @DegisimIkon(Model.Sonuc.YanitSayisiDegisimYuzdesi) me-1"></i>%@Model.Sonuc.YanitSayisiDegisimYuzdesi.ToString("0.#")
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="kart-etiket mb-2"><i class="bi bi-graph-up-arrow me-1"></i>Yanıt Oranı (%)</div>
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <span class="h3 mb-0">%@Model.Sonuc.GuncelYanitOrani.ToString("0.#")</span>
+                    <span class="text-muted">önce %@Model.Sonuc.OncekiYanitOrani.ToString("0.#")</span>
+                </div>
+                <span class="badge @DegisimRozeti(Model.Sonuc.YanitOraniFarki) mt-2">
+                    <i class="bi @DegisimIkon(Model.Sonuc.YanitOraniFarki) me-1"></i>@Model.Sonuc.YanitOraniFarki.ToString("+0.#;-0.#;0") puan
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="kart-etiket mb-2"><i class="bi bi-hand-thumbs-up me-1"></i>NPS</div>
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <span class="h3 mb-0">@Model.Sonuc.GuncelNps</span>
+                    <span class="text-muted">önce @Model.Sonuc.OncekiNps</span>
+                </div>
+                <span class="badge @DegisimRozeti(Model.Sonuc.NpsFarki) mt-2">
+                    <i class="bi @DegisimIkon(Model.Sonuc.NpsFarki) me-1"></i>@Model.Sonuc.NpsFarki.ToString("+0;-0;0") puan
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-white">
+        <h2 class="h5 mb-0"><i class="bi bi-hospital me-2"></i>Hastane Bazlı Karşılaştırma</h2>
+    </div>
+    @if (Model.Sonuc.HastaneKarsilastirmalari.Count == 0)
+    {
+        <div class="card-body"><div class="alert alert-info mb-0">Gösterilecek veri bulunmuyor.</div></div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Hastane</th>
+                        <th class="text-center">Önceki Puan</th>
+                        <th class="text-center">Güncel Puan</th>
+                        <th class="text-center">Fark</th>
+                        <th class="text-end">Önceki Yanıt</th>
+                        <th class="text-end">Güncel Yanıt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hastane in Model.Sonuc.HastaneKarsilastirmalari)
+                    {
+                        <tr>
+                            <td>@hastane.HastaneAdi</td>
+                            <td class="text-center">@hastane.OncekiOrtalamaPuan.ToString("0.00")</td>
+                            <td class="text-center">@hastane.GuncelOrtalamaPuan.ToString("0.00")</td>
+                            <td class="text-center">
+                                <span class="badge @DegisimRozeti(hastane.Fark)">
+                                    <i class="bi @DegisimIkon(hastane.Fark) me-1"></i>@hastane.Fark.ToString("+0.00;-0.00;0.00")
+                                </span>
+                            </td>
+                            <td class="text-end">@hastane.OncekiYanitSayisi</td>
+                            <td class="text-end">@hastane.GuncelYanitSayisi</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

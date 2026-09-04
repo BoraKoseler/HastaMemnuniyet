@@ -1,0 +1,29 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Doktorlar.SilModel
+@{
+    ViewData["Title"] = "Doktor Sil";
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-trash me-2"></i>Doktor Sil</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+@if (Model.Doktor is not null)
+{
+    <div class="card shadow-sm form-kart border-danger">
+        <div class="card-body p-4">
+            <p class="mb-3"><strong>@Model.Doktor.TamAd</strong> adlı doktoru silmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
+            <dl class="row mb-3">
+                <dt class="col-sm-3">Ad Soyad</dt><dd class="col-sm-9">@Model.Doktor.Ad @Model.Doktor.Soyad</dd>
+                <dt class="col-sm-3">Unvan</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Doktor.Unvan) ? "-" : Model.Doktor.Unvan)</dd>
+                <dt class="col-sm-3">Birimler</dt><dd class="col-sm-9">@(Model.Doktor.BirimAdlari.Count == 0 ? "-" : string.Join(", ", Model.Doktor.BirimAdlari))</dd>
+            </dl>
+            <form method="post">
+                <input type="hidden" name="id" value="@Model.Doktor.Id" />
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i> Evet, Sil</button>
+                <a asp-page="Index" class="btn btn-outline-secondary">Vazgeç</a>
+            </form>
+        </div>
+    </div>
+}

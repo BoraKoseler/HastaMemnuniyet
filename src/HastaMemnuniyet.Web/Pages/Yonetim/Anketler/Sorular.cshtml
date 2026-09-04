@@ -1,0 +1,196 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Anketler.SorularModel
+@{
+    ViewData["Title"] = "Anket Soruları";
+}
+
+<div class="sayfa-baslik">
+    <div>
+        <h1><i class="bi bi-list-check me-2"></i>@Model.Anket.Ad</h1>
+        <p class="text-muted mb-0">Anket Soruları Yönetimi</p>
+    </div>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Anketlere Dön</a>
+</div>
+
+<div class="row">
+    <div class="col-lg-7 mb-4">
+        <h4 class="mb-3">Mevcut Sorular (@Model.Anket.Sorular.Count)</h4>
+        @if (Model.Anket.Sorular.Count == 0)
+        {
+            <div class="alert alert-info">Bu ankete henüz soru eklenmemiş. Sağdaki formu kullanarak soru ekleyebilirsiniz.</div>
+        }
+        else
+        {
+            @foreach (var soru in Model.Anket.Sorular.OrderBy(s => s.SiraNo))
+            {
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <span class="badge bg-secondary me-1">#@soru.SiraNo</span>
+                                <span class="badge bg-info text-dark me-1">@GorunumAdlari.SoruTipiAdi(soru.SoruTipi)</span>
+                                @if (soru.ZorunluMu)
+                                {
+                                    <span class="badge bg-danger me-1">Zorunlu</span>
+                                }
+                                @if (!soru.AktifMi)
+                                {
+                                    <span class="badge bg-secondary">Pasif</span>
+                                }
+                            </div>
+                            <form method="post" asp-page-handler="SoruSil" asp-route-id="@Model.Anket.Id"
+                                  onsubmit="return confirm('Bu soruyu silmek istediğinize emin misiniz?');">
+                                <input type="hidden" name="soruId" value="@soru.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </div>
+                        <p class="mb-2 mt-2 fw-semibold">@soru.SoruMetni</p>
+
+                        @if (soru.KosulBagliSoruId.HasValue)
+                        {
+                            var bagliSoru = Model.Anket.Sorular.FirstOrDefault(x => x.Id == soru.KosulBagliSoruId.Value);
+                            <p class="text-muted small mb-1">
+                                <i class="bi bi-diagram-2 me-1"></i>
+                                Koşullu: #@(bagliSoru?.SiraNo.ToString() ?? "?") sorusunun cevabı
+                                "<strong>@soru.KosulDegeri</strong>" olduğunda görünür.
+                            </p>
+                        }
+
+                        @if (soru.SoruTipi == SoruTipi.Puanlama)
+                        {
+                            <p class="text-muted small mb-0">Puanlama aralığı: @(soru.PuanlamaAltSinir ?? 1) - @(soru.PuanlamaUstSinir ?? 5)</p>
+                        }
+                        else if (soru.SoruTipi == SoruTipi.AcikUclu)
+                        {
+                            <p class="text-muted small mb-0">Maksimum karakter: @(soru.MaksimumKarakterSayisi?.ToString() ?? "Sınırsız")</p>
+                        }
+                        else if (soru.SoruTipi == SoruTipi.TekSecim || soru.SoruTipi == SoruTipi.CokluSecim)
+                        {
+                            <div class="mt-2">
+                                <div class="small text-muted mb-1">Seçenekler:</div>
+                                <ul class="list-group list-group-flush mb-2">
+                                    @foreach (var secenek in soru.Secenekler.OrderBy(x => x.SiraNo))
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-1">
+                                            <span><i class="bi bi-dot"></i>@secenek.MetinDegeri</span>
+                                            <form method="post" asp-page-handler="SecenekSil" asp-route-id="@Model.Anket.Id">
+                                                <input type="hidden" name="secenekId" value="@secenek.Id" />
+                                                <button type="submit" class="btn btn-sm btn-link text-danger p-0"><i class="bi bi-x-circle"></i></button>
+                                            </form>
+                                        </li>
+                                    }
+                                </ul>
+                                <form method="post" asp-page-handler="SecenekEkle" asp-route-id="@Model.Anket.Id" class="input-group input-group-sm">
+                                    <input type="hidden" name="soruId" value="@soru.Id" />
+                                    <input type="text" name="metin" class="form-control" placeholder="Yeni seçenek ekle" />
+                                    <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus-lg"></i> Ekle</button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm form-kart">
+            <div class="card-header bg-primary text-white"><i class="bi bi-plus-circle me-1"></i> Yeni Soru Ekle</div>
+            <div class="card-body">
+                <form method="post" asp-page-handler="SoruEkle" asp-route-id="@Model.Anket.Id">
+                    <div asp-validation-summary="All" class="alert alert-danger" role="alert"
+                         style="@(ViewData.ModelState.ErrorCount > 0 ? "" : "display:none;")"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Girdi.SoruMetni" class="form-label">Soru Metni</label>
+                        <textarea asp-for="Girdi.SoruMetni" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Girdi.SoruMetni" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Girdi.SoruTipi" class="form-label">Soru Tipi</label>
+                        <select asp-for="Girdi.SoruTipi" asp-items="Model.TipSecenekleri" class="form-select" id="soruTipiSecim"></select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label asp-for="Girdi.SiraNo" class="form-label">Sıra No</label>
+                            <input asp-for="Girdi.SiraNo" class="form-control" type="number" min="0" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label asp-for="Girdi.Kategori" class="form-label">Kategori</label>
+                            <input asp-for="Girdi.Kategori" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- Puanlama alanları -->
+                    <div class="tip-alan-puanlama border rounded p-2 mb-3" style="display:none;">
+                        <div class="small text-muted mb-2">Puanlama Aralığı</div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label asp-for="Girdi.PuanlamaAltSinir" class="form-label">Alt Sınır</label>
+                                <input asp-for="Girdi.PuanlamaAltSinir" class="form-control" type="number" value="1" />
+                            </div>
+                            <div class="col-6">
+                                <label asp-for="Girdi.PuanlamaUstSinir" class="form-label">Üst Sınır</label>
+                                <input asp-for="Girdi.PuanlamaUstSinir" class="form-control" type="number" value="5" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seçenek alanları -->
+                    <div class="tip-alan-secenek border rounded p-2 mb-3" style="display:none;">
+                        <div class="small text-muted mb-2">Seçenekler</div>
+                        <div id="secenekKabi">
+                            <div class="secenek-satiri">
+                                <input type="text" name="Girdi.Secenekler" class="form-control" placeholder="Seçenek metni" />
+                                <button type="button" class="btn btn-outline-danger secenek-sil"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" id="secenekEkleBtn" class="btn btn-sm btn-outline-primary mt-2">
+                            <i class="bi bi-plus-lg"></i> Seçenek Ekle
+                        </button>
+                    </div>
+
+                    <!-- Açık uçlu alanı -->
+                    <div class="tip-alan-metin border rounded p-2 mb-3" style="display:none;">
+                        <label asp-for="Girdi.MaksimumKarakterSayisi" class="form-label">Maksimum Karakter Sayısı</label>
+                        <input asp-for="Girdi.MaksimumKarakterSayisi" class="form-control" type="number" min="0" placeholder="Örn. 500" />
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input asp-for="Girdi.ZorunluMu" class="form-check-input" />
+                        <label asp-for="Girdi.ZorunluMu" class="form-check-label">Zorunlu Soru</label>
+                    </div>
+
+                    <!-- Koşullu görünürlük -->
+                    <div class="border rounded p-2 mb-3">
+                        <div class="small text-muted mb-2"><i class="bi bi-diagram-2 me-1"></i>Koşullu Görünürlük (isteğe bağlı)</div>
+                        <div class="mb-2">
+                            <label asp-for="Girdi.KosulBagliSoruId" class="form-label">Bağlı Soru</label>
+                            <select asp-for="Girdi.KosulBagliSoruId" class="form-select">
+                                <option value="">— Koşul yok (her zaman görünür) —</option>
+                                @foreach (var mevcut in Model.Anket.Sorular.OrderBy(s => s.SiraNo))
+                                {
+                                    <option value="@mevcut.Id">#@mevcut.SiraNo - @mevcut.SoruMetni</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label asp-for="Girdi.KosulDegeri" class="form-label">Koşul Değeri</label>
+                            <input asp-for="Girdi.KosulDegeri" class="form-control" placeholder="Örn. Evet / 5 / seçenek metni" />
+                            <span asp-validation-for="Girdi.KosulDegeri" class="text-danger small"></span>
+                            <div class="text-muted small">Bağlı sorunun cevabı bu değere eşit olduğunda bu soru katılımcıya gösterilir.</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg me-1"></i> Soruyu Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

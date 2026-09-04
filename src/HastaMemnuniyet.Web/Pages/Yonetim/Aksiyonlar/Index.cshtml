@@ -1,0 +1,91 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Aksiyonlar.IndexModel
+@{
+    ViewData["Title"] = "İyileştirme Aksiyonları";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-list-check me-2"></i>İyileştirme Aksiyonları</h1>
+    <a asp-page="Ekle" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i> Yeni Aksiyon</a>
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Durum</label>
+        <select asp-for="Durum" asp-items="Model.DurumSecenekleri" class="form-select">
+            <option value="">Tüm durumlar</option>
+        </select>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="form-check mt-4">
+            <input asp-for="SadeceGecikmis" class="form-check-input" type="checkbox" />
+            <label asp-for="SadeceGecikmis" class="form-check-label">Yalnızca gecikmişler</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Filtrele</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Temizle</a>
+    </div>
+</form>
+
+@if (Model.Aksiyonlar.Count == 0)
+{
+    <div class="alert alert-info">Gösterilecek aksiyon bulunmuyor.</div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Başlık</th>
+                        <th>Hastane / Birim</th>
+                        <th>Sorumlu</th>
+                        <th>Öncelik</th>
+                        <th>Durum</th>
+                        <th>Hedef Tarih</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var aksiyon in Model.Aksiyonlar)
+                    {
+                        <tr>
+                            <td>@aksiyon.Baslik</td>
+                            <td>
+                                @(aksiyon.HastaneAdi ?? "-")
+                                @if (!string.IsNullOrWhiteSpace(aksiyon.BirimAdi))
+                                {
+                                    <span class="text-muted small d-block">@aksiyon.BirimAdi</span>
+                                }
+                            </td>
+                            <td>@(aksiyon.SorumluKullaniciAdi ?? "-")</td>
+                            <td><span class="badge @GorunumAdlari.AksiyonOnceligiRozet(aksiyon.Oncelik)">@GorunumAdlari.AksiyonOnceligiAdi(aksiyon.Oncelik)</span></td>
+                            <td><span class="badge @GorunumAdlari.AksiyonDurumuRozet(aksiyon.Durum)">@GorunumAdlari.AksiyonDurumuAdi(aksiyon.Durum)</span></td>
+                            <td>
+                                @if (aksiyon.HedefTarih.HasValue)
+                                {
+                                    <span class="@(aksiyon.GecikmisMi ? "text-danger fw-semibold" : "")">
+                                        @aksiyon.HedefTarih.Value.ToString("dd.MM.yyyy")
+                                        @if (aksiyon.GecikmisMi)
+                                        {
+                                            <i class="bi bi-exclamation-circle ms-1"></i>
+                                        }
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-page="Duzenle" asp-route-id="@aksiyon.Id" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

@@ -1,0 +1,105 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Davetler.IndexModel
+@{
+    ViewData["Title"] = "Davetler";
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-send me-2"></i>Davetler</h1>
+    <a asp-page="Olustur" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Yeni Davet Oluştur</a>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.BasariMesaji))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-1"></i> @Model.BasariMesaji
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.HataMesaji))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle me-1"></i> @Model.HataMesaji
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+    </div>
+}
+
+<form method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-sm-6 col-md-4">
+        <label class="form-label">Duruma Göre Filtrele</label>
+        <select asp-for="Durum" asp-items="Model.DurumSecenekleri" class="form-select">
+            <option value="">Tüm durumlar</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Filtrele</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Temizle</a>
+    </div>
+</form>
+
+@if (Model.Davetler.Count == 0)
+{
+    <div class="alert alert-info">Gösterilecek davet bulunmuyor.</div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Anket</th>
+                        <th>Hastane / Birim</th>
+                        <th>Kanal</th>
+                        <th>Durum</th>
+                        <th>Hatırlatma</th>
+                        <th>Oluşturulma</th>
+                        <th>Son Geçerlilik</th>
+                        <th class="text-end">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var davet in Model.Davetler)
+                    {
+                        <tr>
+                            <td>@(davet.AnketAdi ?? "-")</td>
+                            <td>
+                                @(davet.HastaneAdi ?? "-")
+                                @if (!string.IsNullOrWhiteSpace(davet.BirimAdi))
+                                {
+                                    <span class="text-muted small d-block">@davet.BirimAdi</span>
+                                }
+                            </td>
+                            <td><span class="badge bg-light text-dark border">@GorunumAdlari.KanalAdi(davet.GonderimKanali)</span></td>
+                            <td><span class="badge @GorunumAdlari.DavetDurumuRozet(davet.Durum)">@GorunumAdlari.DavetDurumuAdi(davet.Durum)</span></td>
+                            <td><span class="badge bg-light text-dark border">@davet.HatirlatmaSayisi</span></td>
+                            <td>@davet.OlusturulmaTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@davet.SonGecerlilikTarihi.ToString("dd.MM.yyyy")</td>
+                            <td class="text-end">
+                                @{
+                                    var hatirlatmaUygun = davet.Durum == DavetDurumu.Gonderildi
+                                        || davet.Durum == DavetDurumu.Acildi
+                                        || davet.Durum == DavetDurumu.KismiTamamlandi;
+                                }
+                                @if (hatirlatmaUygun)
+                                {
+                                    <form method="post" asp-page-handler="Hatirlatma" asp-route-id="@davet.Id"
+                                          onsubmit="return confirm('Bu davete hatırlatma göndermek istediğinize emin misiniz?');"
+                                          class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-bell me-1"></i> Hatırlatma Gönder
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">-</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

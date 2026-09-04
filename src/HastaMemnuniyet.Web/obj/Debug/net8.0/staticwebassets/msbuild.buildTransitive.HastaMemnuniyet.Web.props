@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/HastaMemnuniyet.Web.props" />
+</Project>

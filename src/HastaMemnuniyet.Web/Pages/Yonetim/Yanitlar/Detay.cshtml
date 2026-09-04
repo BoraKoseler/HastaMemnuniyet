@@ -1,0 +1,76 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Yanitlar.DetayModel
+@{
+    ViewData["Title"] = "Yanıt Detayı";
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-chat-square-text me-2"></i>Yanıt Detayı</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+@if (Model.Yanit is not null)
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light"><i class="bi bi-info-circle me-1"></i> Genel Bilgiler</div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Anket</dt><dd class="col-sm-9">@(Model.Yanit.AnketAdi ?? "-")</dd>
+                <dt class="col-sm-3">Hastane</dt><dd class="col-sm-9">@(Model.Yanit.HastaneAdi ?? "-")</dd>
+                <dt class="col-sm-3">Birim</dt><dd class="col-sm-9">@(Model.Yanit.BirimAdi ?? "-")</dd>
+                <dt class="col-sm-3">Doktor</dt><dd class="col-sm-9">@(Model.Yanit.DoktorAdi ?? "-")</dd>
+                <dt class="col-sm-3">Kanal</dt><dd class="col-sm-9">@(Model.Yanit.KanalAdi ?? "-")</dd>
+                <dt class="col-sm-3">Başlama</dt><dd class="col-sm-9">@Model.Yanit.BaslamaTarihi.ToString("dd.MM.yyyy HH:mm")</dd>
+                <dt class="col-sm-3">Tamamlanma</dt><dd class="col-sm-9">@(Model.Yanit.TamamlanmaTarihi?.ToString("dd.MM.yyyy HH:mm") ?? "-")</dd>
+                <dt class="col-sm-3">IP Adresi</dt><dd class="col-sm-9">@(Model.Yanit.IpAdresi ?? "-")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Cevaplar (@Model.Yanit.Cevaplar.Count)</h4>
+    @if (Model.Yanit.Cevaplar.Count == 0)
+    {
+        <div class="alert alert-info">Bu yanıta ait cevap bulunmuyor.</div>
+    }
+    else
+    {
+        <div class="list-group">
+            @{ var sira = 1; }
+            @foreach (var cevap in Model.Yanit.Cevaplar)
+            {
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">@sira. @(cevap.SoruMetni ?? "-")</span>
+                        <span class="badge bg-info text-dark">@GorunumAdlari.SoruTipiAdi(cevap.SoruTipi)</span>
+                    </div>
+                    <div class="mt-2">
+                        @switch (cevap.SoruTipi)
+                        {
+                            case SoruTipi.Puanlama:
+                                <span class="badge bg-primary fs-6">@(cevap.PuanDegeri?.ToString() ?? "-") puan</span>
+                                break;
+                            case SoruTipi.EvetHayir:
+                                <span class="badge @(cevap.BoolDegeri == true ? "bg-success" : "bg-secondary") fs-6">
+                                    @(cevap.BoolDegeri == true ? "Evet" : cevap.BoolDegeri == false ? "Hayır" : "-")
+                                </span>
+                                break;
+                            case SoruTipi.TekSecim:
+                                <span>@(cevap.SecenekMetni ?? "-")</span>
+                                break;
+                            case SoruTipi.CokluSecim:
+                                <span>@(string.IsNullOrWhiteSpace(cevap.SecenekMetni) ? (cevap.SeciliSecenekIdleri ?? "-") : cevap.SecenekMetni)</span>
+                                break;
+                            case SoruTipi.AcikUclu:
+                                <p class="mb-0 text-muted">@(string.IsNullOrWhiteSpace(cevap.MetinDegeri) ? "-" : cevap.MetinDegeri)</p>
+                                break;
+                            default:
+                                <span>-</span>
+                                break;
+                        }
+                    </div>
+                </div>
+                sira++;
+            }
+        </div>
+    }
+}

@@ -1,0 +1,91 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Aksiyonlar.DuzenleModel
+@{
+    ViewData["Title"] = "Aksiyon Düzenle";
+    var aksiyon = Model.Aksiyon!;
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-pencil-square me-2"></i>Aksiyon Düzenle</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="form-kart">
+            <h2 class="h5 mb-3">@aksiyon.Baslik</h2>
+            <p class="text-muted">@aksiyon.Aciklama</p>
+            <hr />
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Girdi.Durum" class="form-label"></label>
+                        <select asp-for="Girdi.Durum" asp-items="Model.DurumSecenekleri" class="form-select"></select>
+                        <span asp-validation-for="Girdi.Durum" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Girdi.Oncelik" class="form-label"></label>
+                        <select asp-for="Girdi.Oncelik" asp-items="Model.OncelikSecenekleri" class="form-select"></select>
+                        <span asp-validation-for="Girdi.Oncelik" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Girdi.HedefTarih" class="form-label"></label>
+                        <input asp-for="Girdi.HedefTarih" class="form-control" type="date" />
+                        <span asp-validation-for="Girdi.HedefTarih" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Girdi.DegisiklikAciklamasi" class="form-label"></label>
+                    <input asp-for="Girdi.DegisiklikAciklamasi" class="form-control" />
+                    <span asp-validation-for="Girdi.DegisiklikAciklamasi" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Girdi.KapanisNotu" class="form-label"></label>
+                    <textarea asp-for="Girdi.KapanisNotu" class="form-control" rows="2"></textarea>
+                    <span asp-validation-for="Girdi.KapanisNotu" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Güncelle</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h2 class="h5 mb-0">Durum Geçmişi</h2></div>
+            @if (aksiyon.Gecmis.Count == 0)
+            {
+                <div class="card-body"><div class="alert alert-info mb-0">Henüz durum değişikliği yok.</div></div>
+            }
+            else
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var gecmis in aksiyon.Gecmis.OrderByDescending(g => g.Tarih))
+                    {
+                        <li class="list-group-item">
+                            <div>
+                                <span class="badge @GorunumAdlari.AksiyonDurumuRozet(gecmis.EskiDurum)">@GorunumAdlari.AksiyonDurumuAdi(gecmis.EskiDurum)</span>
+                                <i class="bi bi-arrow-right mx-1"></i>
+                                <span class="badge @GorunumAdlari.AksiyonDurumuRozet(gecmis.YeniDurum)">@GorunumAdlari.AksiyonDurumuAdi(gecmis.YeniDurum)</span>
+                            </div>
+                            @if (!string.IsNullOrWhiteSpace(gecmis.Aciklama))
+                            {
+                                <div class="small text-muted mt-1">@gecmis.Aciklama</div>
+                            }
+                            <div class="small text-muted mt-1">
+                                @(gecmis.KullaniciAdi ?? "-") — @gecmis.Tarih.ToString("dd.MM.yyyy HH:mm")
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

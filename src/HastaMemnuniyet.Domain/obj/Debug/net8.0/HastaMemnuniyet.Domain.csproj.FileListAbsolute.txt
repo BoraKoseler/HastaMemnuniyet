@@ -1,0 +1,12 @@
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/bin/Debug/net8.0/HastaMemnuniyet.Domain.deps.json
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/bin/Debug/net8.0/HastaMemnuniyet.Domain.dll
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/bin/Debug/net8.0/HastaMemnuniyet.Domain.pdb
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.csproj.AssemblyReference.cache
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.AssemblyInfoInputs.cache
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.AssemblyInfo.cs
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.csproj.CoreCompileInputs.cache
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.dll
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/refint/HastaMemnuniyet.Domain.dll
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/HastaMemnuniyet.Domain.pdb
+/home/ubuntu/HastaMemnuniyet/src/HastaMemnuniyet.Domain/obj/Debug/net8.0/ref/HastaMemnuniyet.Domain.dll

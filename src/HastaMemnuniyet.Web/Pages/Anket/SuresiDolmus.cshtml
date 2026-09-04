@@ -1,0 +1,21 @@
+@page "/Anket/SuresiDolmus"
+@model HastaMemnuniyet.Web.Pages.Anket.SuresiDolmusModel
+@{
+    ViewData["Title"] = "Bağlantı Geçersiz";
+    Layout = "_AnketLayout";
+}
+
+<div class="anket-kart text-center">
+    <div class="mb-3">
+        <i class="bi bi-exclamation-triangle-fill text-warning" style="font-size: 4rem;"></i>
+    </div>
+    <h1 class="h3 mb-3">Bağlantı Geçersiz veya Süresi Dolmuş</h1>
+    <p class="lead text-muted mb-2">
+        Kullanmaya çalıştığınız anket bağlantısı geçersiz, daha önce kullanılmış
+        veya süresi dolmuş olabilir.
+    </p>
+    <p class="text-muted mb-0">
+        Bir sorun olduğunu düşünüyorsanız, lütfen size bağlantıyı ileten sağlık
+        kuruluşu ile iletişime geçiniz.
+    </p>
+</div>

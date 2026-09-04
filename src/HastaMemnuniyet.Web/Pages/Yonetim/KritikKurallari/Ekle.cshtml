@@ -1,0 +1,62 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.KritikKurallari.EkleModel
+@{
+    ViewData["Title"] = "Yeni Kural";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-plus-circle me-2"></i>Yeni Kritik Kural</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+<div class="form-kart">
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.KuralTipi" class="form-label"></label>
+            <select asp-for="Girdi.KuralTipi" asp-items="Model.KuralTipiSecenekleri" class="form-select"></select>
+            <span asp-validation-for="Girdi.KuralTipi" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.AnketId" class="form-label"></label>
+            <select asp-for="Girdi.AnketId" asp-items="Model.AnketSecenekleri" class="form-select">
+                <option value="">Tüm anketler</option>
+            </select>
+            <span asp-validation-for="Girdi.AnketId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.EsikDegeri" class="form-label"></label>
+            <input asp-for="Girdi.EsikDegeri" class="form-control" type="number" min="1" max="100" />
+            <div class="form-text">Puan altı kuralları için: bu değere eşit veya altındaki puanlar kritik sayılır.</div>
+            <span asp-validation-for="Girdi.EsikDegeri" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.AnahtarKelimeler" class="form-label"></label>
+            <input asp-for="Girdi.AnahtarKelimeler" class="form-control" placeholder="ör. kaba, ilgisiz, kirli" />
+            <div class="form-text">Anahtar kelime kuralları için: virgülle ayrılmış kelimeler.</div>
+            <span asp-validation-for="Girdi.AnahtarKelimeler" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Girdi.HedefSecenekId" class="form-label"></label>
+            <input asp-for="Girdi.HedefSecenekId" class="form-control" type="number" />
+            <div class="form-text">Seçenek eşleşmesi kuralları için: kritik kabul edilen seçeneğin kimliği.</div>
+            <span asp-validation-for="Girdi.HedefSecenekId" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input asp-for="Girdi.AktifMi" class="form-check-input" type="checkbox" />
+            <label asp-for="Girdi.AktifMi" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i> Kaydet</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

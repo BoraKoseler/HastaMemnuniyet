@@ -1,0 +1,151 @@
+@page
+@model HastaMemnuniyet.Web.Pages.Yonetim.Raporlar.AnahtarKelimeAnaliziModel
+@{
+    ViewData["Title"] = "Anahtar Kelime Analizi";
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-tags me-2"></i>Anahtar Kelime Analizi</h1>
+    <span class="text-muted small">
+        @Model.Sonuc.BaslangicTarihi.ToString("dd.MM.yyyy") - @Model.Sonuc.BitisTarihi.ToString("dd.MM.yyyy")
+    </span>
+</div>
+
+<div class="alert alert-info small">
+    <i class="bi bi-info-circle me-1"></i>
+    Açık uçlu (serbest metin) yanıtlarda en sık geçen kelimeler analiz edilir. Türkçe etkisiz kelimeler (ve, ile, bir vb.) analiz dışında bırakılır.
+</div>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Başlangıç Tarihi</label>
+        <input asp-for="Baslangic" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Bitiş Tarihi</label>
+        <input asp-for="Bitis" class="form-control" type="date" />
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <label class="form-label">Hastane</label>
+        <select asp-for="HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+            <option value="">Tüm Hastaneler</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i> Filtrele</button>
+        <a asp-page="AnahtarKelimeAnalizi" class="btn btn-outline-secondary">Temizle</a>
+    </div>
+</form>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-mavi h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Sonuc.ToplamYorum</div>
+                    <div class="kart-etiket">Toplam Yorum</div>
+                </div>
+                <i class="bi bi-chat-left-text kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-yesil h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Sonuc.AnlamliYorumSayisi</div>
+                    <div class="kart-etiket">Anlamlı Yorum</div>
+                </div>
+                <i class="bi bi-check2-square kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-4">
+        <div class="card istatistik-kart kart-turkuaz h-100">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="kart-deger">@Model.Sonuc.EnSikKelimeler.Count</div>
+                    <div class="kart-etiket">Farklı Anahtar Kelime</div>
+                </div>
+                <i class="bi bi-tags kart-ikon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (!Model.Sonuc.VeriVarMi)
+{
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        Seçilen dönem ve kapsam için analiz edilecek yeterli serbest metin yanıtı bulunamadı.
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        <div class="col-lg-7">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white">
+                    <h2 class="h5 mb-0"><i class="bi bi-cloud me-2"></i>Kelime Bulutu</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center gap-2 lh-lg">
+                        @foreach (var kelime in Model.Sonuc.EnSikKelimeler)
+                        {
+                            <span class="badge rounded-pill bg-light text-primary border"
+                                  style="font-size:@(Model.YaziBoyutu(kelime.Sayi).ToString(System.Globalization.CultureInfo.InvariantCulture))rem"
+                                  title="@kelime.Sayi kez geçti">
+                                @kelime.Kelime
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white">
+                    <h2 class="h5 mb-0"><i class="bi bi-list-ol me-2"></i>En Sık Kelimeler</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kelime</th>
+                                <th class="text-end">Sıklık</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var sira = 1; }
+                            @foreach (var kelime in Model.Sonuc.EnSikKelimeler)
+                            {
+                                <tr>
+                                    <td class="text-muted">@sira</td>
+                                    <td>@kelime.Kelime</td>
+                                    <td class="text-end"><span class="badge bg-primary">@kelime.Sayi</span></td>
+                                </tr>
+                                sira++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Sonuc.OrnekYorumlar.Count > 0)
+    {
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0"><i class="bi bi-quote me-2"></i>Örnek Yorumlar</h2>
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var yorum in Model.Sonuc.OrnekYorumlar)
+                {
+                    <li class="list-group-item">@yorum</li>
+                }
+            </ul>
+        </div>
+    }
+}

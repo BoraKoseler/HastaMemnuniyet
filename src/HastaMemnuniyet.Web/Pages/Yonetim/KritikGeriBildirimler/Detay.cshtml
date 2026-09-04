@@ -1,0 +1,125 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.KritikGeriBildirimler.DetayModel
+@{
+    ViewData["Title"] = "Kritik Geri Bildirim Detayı";
+    var kb = Model.KritikGeriBildirim!;
+}
+
+<div class="sayfa-baslik d-flex justify-content-between align-items-center flex-wrap">
+    <h1><i class="bi bi-exclamation-triangle-fill me-2 text-danger"></i>Kritik Geri Bildirim Detayı</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white"><h2 class="h5 mb-0">Genel Bilgiler</h2></div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-5">Tarih</dt>
+                    <dd class="col-7">@kb.OlusturulmaTarihi.ToString("dd.MM.yyyy HH:mm")</dd>
+                    <dt class="col-5">Anket</dt>
+                    <dd class="col-7">@(kb.AnketAdi ?? "-")</dd>
+                    <dt class="col-5">Hastane</dt>
+                    <dd class="col-7">@(kb.HastaneAdi ?? "-")</dd>
+                    <dt class="col-5">Birim</dt>
+                    <dd class="col-7">@(kb.BirimAdi ?? "-")</dd>
+                    <dt class="col-5">Doktor</dt>
+                    <dd class="col-7">@(kb.DoktorAdi ?? "-")</dd>
+                    <dt class="col-5">Kural Tipi</dt>
+                    <dd class="col-7">
+                        @if (kb.KuralTipi.HasValue)
+                        {
+                            <span class="badge bg-danger">@GorunumAdlari.KuralTipiAdi(kb.KuralTipi.Value)</span>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </dd>
+                    <dt class="col-5">Açıklama</dt>
+                    <dd class="col-7">@kb.Aciklama</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-white">
+                <a asp-page="/Yonetim/Aksiyonlar/Ekle" asp-route-kritikId="@kb.Id" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> İyileştirme Aksiyonu Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-white"><h2 class="h5 mb-0">Yanıt Cevapları</h2></div>
+            @if (kb.Cevaplar.Count == 0)
+            {
+                <div class="card-body"><div class="alert alert-info mb-0">Cevap bulunmuyor.</div></div>
+            }
+            else
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var cevap in kb.Cevaplar)
+                    {
+                        <li class="list-group-item">
+                            <div class="fw-semibold">@cevap.SoruMetni</div>
+                            <div class="text-muted">
+                                @if (cevap.PuanDegeri.HasValue)
+                                {
+                                    <span class="badge bg-warning text-dark">@cevap.PuanDegeri puan</span>
+                                }
+                                @if (cevap.BoolDegeri.HasValue)
+                                {
+                                    <span>@(cevap.BoolDegeri.Value ? "Evet" : "Hayır")</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cevap.SecenekMetni))
+                                {
+                                    <span>@cevap.SecenekMetni</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(cevap.MetinDegeri))
+                                {
+                                    <span>@cevap.MetinDegeri</span>
+                                }
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h2 class="h5 mb-0">Bağlı İyileştirme Aksiyonları</h2></div>
+            @if (kb.Aksiyonlar.Count == 0)
+            {
+                <div class="card-body"><div class="alert alert-info mb-0">Henüz aksiyon oluşturulmamış.</div></div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Öncelik</th>
+                                <th>Durum</th>
+                                <th class="text-end">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var aksiyon in kb.Aksiyonlar)
+                            {
+                                <tr>
+                                    <td>@aksiyon.Baslik</td>
+                                    <td><span class="badge @GorunumAdlari.AksiyonOnceligiRozet(aksiyon.Oncelik)">@GorunumAdlari.AksiyonOnceligiAdi(aksiyon.Oncelik)</span></td>
+                                    <td><span class="badge @GorunumAdlari.AksiyonDurumuRozet(aksiyon.Durum)">@GorunumAdlari.AksiyonDurumuAdi(aksiyon.Durum)</span></td>
+                                    <td class="text-end">
+                                        <a asp-page="/Yonetim/Aksiyonlar/Duzenle" asp-route-id="@aksiyon.Id" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

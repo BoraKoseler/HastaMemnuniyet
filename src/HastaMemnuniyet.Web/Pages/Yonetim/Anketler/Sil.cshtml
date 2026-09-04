@@ -1,0 +1,29 @@
+@page "{id:int}"
+@model HastaMemnuniyet.Web.Pages.Yonetim.Anketler.SilModel
+@{
+    ViewData["Title"] = "Anket Sil";
+}
+
+<div class="sayfa-baslik">
+    <h1><i class="bi bi-trash me-2"></i>Anket Sil</h1>
+    <a asp-page="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Listeye Dön</a>
+</div>
+
+@if (Model.Anket is not null)
+{
+    <div class="card shadow-sm form-kart border-danger">
+        <div class="card-body p-4">
+            <p class="mb-3"><strong>@Model.Anket.Ad</strong> adlı anketi silmek istediğinize emin misiniz? Ankete ait tüm sorular da silinecektir. Bu işlem geri alınamaz.</p>
+            <dl class="row mb-3">
+                <dt class="col-sm-3">Ad</dt><dd class="col-sm-9">@Model.Anket.Ad</dd>
+                <dt class="col-sm-3">Tür</dt><dd class="col-sm-9">@GorunumAdlari.AnketTuruAdi(Model.Anket.AnketTuru)</dd>
+                <dt class="col-sm-3">Soru Sayısı</dt><dd class="col-sm-9">@Model.Anket.SoruSayisi</dd>
+            </dl>
+            <form method="post">
+                <input type="hidden" name="id" value="@Model.Anket.Id" />
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i> Evet, Sil</button>
+                <a asp-page="Index" class="btn btn-outline-secondary">Vazgeç</a>
+            </form>
+        </div>
+    </div>
+}

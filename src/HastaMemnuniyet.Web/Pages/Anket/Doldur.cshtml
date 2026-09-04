@@ -1,0 +1,187 @@
+@page "/Anket/{token}/Doldur"
+@model HastaMemnuniyet.Web.Pages.Anket.DoldurModel
+@{
+    ViewData["Title"] = Model.Anket?.Ad ?? "Anket";
+    Layout = "_AnketLayout";
+}
+
+@if (Model.Anket is not null)
+{
+    var sorular = Model.Anket.Sorular.OrderBy(s => s.SiraNo).ToList();
+
+    <div class="anket-kart mx-auto">
+        <h1 class="h4 mb-1">@Model.Anket.Ad</h1>
+        <p class="text-muted">Lütfen aşağıdaki soruları yanıtlayınız. <span class="text-danger">*</span> işaretli sorular zorunludur.</p>
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"
+             style="@(ViewData.ModelState.ErrorCount > 0 ? "" : "display:none;")"></div>
+
+        <form method="post">
+            <input type="hidden" asp-for="Girdi.Token" />
+
+            @for (var i = 0; i < sorular.Count; i++)
+            {
+                var soru = sorular[i];
+                <div class="anket-soru mb-4" data-soru-id="@soru.Id"
+                     data-kosul-soru-id="@soru.KosulBagliSoruId"
+                     data-kosul-degeri="@(soru.KosulBagliSoruId.HasValue ? soru.KosulDegeri : null)">
+                    <input type="hidden" name="Girdi.Cevaplar[@i].SoruId" value="@soru.Id" />
+                    <label class="form-label fw-semibold d-block mb-3">
+                        @(i + 1). @soru.SoruMetni
+                        @if (soru.ZorunluMu)
+                        {
+                            <span class="text-danger">*</span>
+                        }
+                    </label>
+
+                    @switch (soru.SoruTipi)
+                    {
+                        case SoruTipi.Puanlama:
+                            {
+                                var alt = soru.PuanlamaAltSinir ?? 1;
+                                var ust = soru.PuanlamaUstSinir ?? 5;
+                                <div class="puan-grup d-flex flex-wrap gap-2">
+                                    @for (var p = alt; p <= ust; p++)
+                                    {
+                                        var radioId = $"soru_{soru.Id}_puan_{p}";
+                                        <div class="puan-secenek">
+                                            <input class="btn-check" type="radio" name="Girdi.Cevaplar[@i].PuanDegeri"
+                                                   id="@radioId" value="@p" />
+                                            <label class="btn btn-outline-primary" for="@radioId">@p</label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="d-flex justify-content-between text-muted small mt-1">
+                                    <span>Çok kötü</span>
+                                    <span>Çok iyi</span>
+                                </div>
+                                break;
+                            }
+                        case SoruTipi.TekSecim:
+                            {
+                                foreach (var secenek in soru.Secenekler.OrderBy(x => x.SiraNo))
+                                {
+                                    var radioId = $"soru_{soru.Id}_sec_{secenek.Id}";
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Girdi.Cevaplar[@i].SecenekId"
+                                               id="@radioId" value="@secenek.Id" />
+                                        <label class="form-check-label" for="@radioId">@secenek.MetinDegeri</label>
+                                    </div>
+                                }
+                                break;
+                            }
+                        case SoruTipi.CokluSecim:
+                            {
+                                foreach (var secenek in soru.Secenekler.OrderBy(x => x.SiraNo))
+                                {
+                                    var cbId = $"soru_{soru.Id}_cs_{secenek.Id}";
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="Girdi.Cevaplar[@i].SeciliSecenekIdleri"
+                                               id="@cbId" value="@secenek.Id" />
+                                        <label class="form-check-label" for="@cbId">@secenek.MetinDegeri</label>
+                                    </div>
+                                }
+                                break;
+                            }
+                        case SoruTipi.EvetHayir:
+                            {
+                                var evetId = $"soru_{soru.Id}_evet";
+                                var hayirId = $"soru_{soru.Id}_hayir";
+                                <div class="d-flex gap-2">
+                                    <div class="flex-fill">
+                                        <input class="btn-check" type="radio" name="Girdi.Cevaplar[@i].BoolDegeri"
+                                               id="@evetId" value="true" />
+                                        <label class="btn btn-outline-success w-100" for="@evetId"><i class="bi bi-hand-thumbs-up me-1"></i> Evet</label>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <input class="btn-check" type="radio" name="Girdi.Cevaplar[@i].BoolDegeri"
+                                               id="@hayirId" value="false" />
+                                        <label class="btn btn-outline-danger w-100" for="@hayirId"><i class="bi bi-hand-thumbs-down me-1"></i> Hayır</label>
+                                    </div>
+                                </div>
+                                break;
+                            }
+                        case SoruTipi.AcikUclu:
+                            {
+                                var sayacId = $"sayac_{soru.Id}";
+                                var maks = soru.MaksimumKarakterSayisi;
+                                <textarea name="Girdi.Cevaplar[@i].MetinDegeri" class="form-control" rows="3"
+                                          maxlength="@(maks?.ToString() ?? null)"
+                                          data-karakter-sayac="@sayacId" placeholder="Yanıtınızı buraya yazınız..."></textarea>
+                                <div class="text-muted small mt-1 karakter-sayac" id="@sayacId"></div>
+                                break;
+                            }
+                        case SoruTipi.Nps:
+                            {
+                                <div class="nps-grup d-flex flex-wrap gap-1">
+                                    @for (var p = 0; p <= 10; p++)
+                                    {
+                                        var radioId = $"soru_{soru.Id}_nps_{p}";
+                                        <div class="nps-secenek">
+                                            <input class="btn-check" type="radio" name="Girdi.Cevaplar[@i].PuanDegeri"
+                                                   id="@radioId" value="@p" />
+                                            <label class="btn btn-outline-primary" for="@radioId">@p</label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="d-flex justify-content-between text-muted small mt-1">
+                                    <span>Hiç tavsiye etmem</span>
+                                    <span>Kesinlikle tavsiye ederim</span>
+                                </div>
+                                break;
+                            }
+                    }
+                </div>
+            }
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-send me-1"></i> Anketi Gönder</button>
+            </div>
+        </form>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Koşullu soru görünürlüğü: bağlı sorunun cevabı beklenen değere eşit olduğunda soru gösterilir.
+        (function () {
+            var kosulluSorular = Array.prototype.slice.call(document.querySelectorAll('[data-kosul-soru-id]'));
+            if (kosulluSorular.length === 0) return;
+
+            function soruDivBul(soruId) {
+                return document.querySelector('.anket-soru[data-soru-id="' + soruId + '"]');
+            }
+
+            // Bağlı sorunun mevcut cevabını (hem ham değer hem etiket metni) küçük harfe indirgenmiş olarak toplar.
+            function cevapDegerleri(soruDiv) {
+                var degerler = [];
+                var secililer = soruDiv.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked');
+                Array.prototype.forEach.call(secililer, function (girdi) {
+                    if (girdi.value) degerler.push(girdi.value.trim().toLowerCase());
+                    var etiket = soruDiv.querySelector('label[for="' + girdi.id + '"]');
+                    if (etiket) degerler.push(etiket.textContent.trim().toLowerCase());
+                });
+                var metin = soruDiv.querySelector('textarea');
+                if (metin && metin.value) degerler.push(metin.value.trim().toLowerCase());
+                return degerler;
+            }
+
+            function gorunurlukGuncelle() {
+                kosulluSorular.forEach(function (div) {
+                    var bagliId = div.getAttribute('data-kosul-soru-id');
+                    var beklenen = (div.getAttribute('data-kosul-degeri') || '').trim().toLowerCase();
+                    var bagliDiv = bagliId ? soruDivBul(bagliId) : null;
+                    var goster = false;
+                    if (bagliDiv && beklenen.length > 0) {
+                        goster = cevapDegerleri(bagliDiv).indexOf(beklenen) !== -1;
+                    }
+                    div.style.display = goster ? '' : 'none';
+                });
+            }
+
+            document.addEventListener('change', gorunurlukGuncelle);
+            document.addEventListener('input', gorunurlukGuncelle);
+            gorunurlukGuncelle();
+        })();
+    </script>
+}
