@@ -13,7 +13,7 @@
 <body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-            <div class="container">
+            <div class="container-fluid px-3">
                 <a class="navbar-brand fw-bold" asp-page="/Index">
                     <i class="bi bi-heart-pulse-fill me-1"></i> Hasta Memnuniyet Sistemi
                 </a>
@@ -28,35 +28,55 @@
                         var tamYetkili = yonetici || User.IsInRole(RolSabitleri.KaliteBirimi);
                         var kritikErisim = tamYetkili || User.IsInRole(RolSabitleri.BirimYoneticisi);
                         var ustYonetimErisim = yonetici || User.IsInRole(RolSabitleri.UstYonetim);
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
                             @if (yonetici)
                             {
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Hastaneler/Index">Hastaneler</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Birimler/Index">Birimler</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Doktorlar/Index">Doktorlar</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="kurumsalMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kurumsal</a>
+                                    <ul class="dropdown-menu" aria-labelledby="kurumsalMenu">
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Hastaneler/Index">Hastaneler</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Birimler/Index">Birimler</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Doktorlar/Index">Doktorlar</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Kullanicilar/Index">Kullanıcılar</a></li>
+                                    </ul>
+                                </li>
                             }
                             @if (tamYetkili)
                             {
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Dashboard/Index">Dashboard</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Anketler/Index">Anketler</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Davetler/Index">Davetler</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Yanitlar/Index">Yanıtlar</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="anketMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Anket Yönetimi</a>
+                                    <ul class="dropdown-menu" aria-labelledby="anketMenu">
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Dashboard/Index">Dashboard</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Anketler/Index">Anketler</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Davetler/Index">Davetler</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Yanitlar/Index">Yanıtlar</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/QrKampanyalari/Index">QR Kampanyaları</a></li>
+                                    </ul>
+                                </li>
                             }
                             @if (kritikErisim)
                             {
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/KritikGeriBildirimler/Index">Kritik Geri Bildirimler</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Aksiyonlar/Index">Aksiyonlar</a></li>
-                            }
-                            @if (tamYetkili)
-                            {
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/KritikKurallari/Index">Kritik Kuralları</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/QrKampanyalari/Index">QR Kampanyaları</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="kritikMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kritik & Aksiyon</a>
+                                    <ul class="dropdown-menu" aria-labelledby="kritikMenu">
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/KritikGeriBildirimler/Index">Kritik Geri Bildirimler</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/Aksiyonlar/Index">Aksiyonlar</a></li>
+                                        @if (tamYetkili)
+                                        {
+                                            <li><a class="dropdown-item" asp-page="/Yonetim/KritikKurallari/Index">Kritik Kuralları</a></li>
+                                        }
+                                    </ul>
+                                </li>
                             }
                             @if (yonetici)
                             {
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/VeriYonetimi/Index">Veri Yönetimi</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/Kullanicilar/Index">Kullanıcılar</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-page="/Yonetim/DenetimKayitlari/Index">Denetim Kayıtları</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="sistemMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sistem</a>
+                                    <ul class="dropdown-menu" aria-labelledby="sistemMenu">
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/VeriYonetimi/Index">Veri Yönetimi</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Yonetim/DenetimKayitlari/Index">Denetim Kayıtları</a></li>
+                                    </ul>
+                                </li>
                             }
                             @if (ustYonetimErisim)
                             {
@@ -65,8 +85,7 @@
                             @if (tamYetkili || ustYonetimErisim)
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="raporlarMenu" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">Raporlar</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="raporlarMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Raporlar</a>
                                     <ul class="dropdown-menu" aria-labelledby="raporlarMenu">
                                         <li><a class="dropdown-item" asp-page="/Yonetim/Raporlar/AnahtarKelimeAnalizi"><i class="bi bi-tags me-2"></i>Anahtar Kelime Analizi</a></li>
                                         <li><a class="dropdown-item" asp-page="/Yonetim/Raporlar/DonemselKarsilastirma"><i class="bi bi-arrow-left-right me-2"></i>Dönemsel Karşılaştırma</a></li>
@@ -75,7 +94,7 @@
                                 </li>
                             }
                         </ul>
-                        <ul class="navbar-nav mb-2 mb-lg-0">
+                        <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
                             <li class="nav-item d-flex align-items-center text-white me-2">
                                 <i class="bi bi-person-circle me-1"></i>
                                 <span>@User.Identity!.Name</span>
