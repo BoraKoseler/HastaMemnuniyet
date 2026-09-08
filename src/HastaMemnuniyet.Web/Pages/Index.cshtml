@@ -2,7 +2,31 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Ana Sayfa";
+    Layout = "_Layout";
     var girisYapildi = User.Identity is { IsAuthenticated: true };
+}
+
+@* ───────── ANKET TAMAMLANDI BİLDİRİMİ (Toast) ───────── *@
+@if (Model.AnketTamamlandi)
+{
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:1100;">
+        <div id="anketToast" class="toast show align-items-center text-bg-success border-0 shadow-lg" role="alert">
+            <div class="d-flex">
+                <div class="toast-body fs-6">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    Anketiniz başarıyla tamamlandı. Katılımınız için teşekkür ederiz!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 6 saniye sonra otomatik kapat
+        setTimeout(function() {
+            var t = document.getElementById('anketToast');
+            if (t) { var bsToast = bootstrap.Toast.getOrCreateInstance(t); bsToast.hide(); }
+        }, 6000);
+    </script>
 }
 
 @* ───────── HERO BÖLÜMÜ ───────── *@
