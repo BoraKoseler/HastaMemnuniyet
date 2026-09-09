@@ -29,22 +29,22 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.HastaneId" class="form-label"></label>
-                <select asp-for="Girdi.HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+                <select asp-for="Girdi.HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select" id="hastaneSelect">
                     <option value="">Seçiniz...</option>
                 </select>
                 <span asp-validation-for="Girdi.HastaneId" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.BirimId" class="form-label"></label>
-                <select asp-for="Girdi.BirimId" asp-items="Model.BirimSecenekleri" class="form-select">
-                    <option value="">(İsteğe bağlı)</option>
+                <select asp-for="Girdi.BirimId" class="form-select" id="birimSelect" disabled>
+                    <option value="">(Önce hastane seçiniz)</option>
                 </select>
                 <span asp-validation-for="Girdi.BirimId" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.DoktorId" class="form-label"></label>
-                <select asp-for="Girdi.DoktorId" asp-items="Model.DoktorSecenekleri" class="form-select">
-                    <option value="">(İsteğe bağlı)</option>
+                <select asp-for="Girdi.DoktorId" class="form-select" id="doktorSelect" disabled>
+                    <option value="">(Önce birim seçiniz)</option>
                 </select>
                 <span asp-validation-for="Girdi.DoktorId" class="text-danger"></span>
             </div>
@@ -61,4 +61,58 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Hastane -> Birim -> Doktor kademeli dropdown
+        (function () {
+            var hastaneSel = document.getElementById('hastaneSelect');
+            var birimSel = document.getElementById('birimSelect');
+            var doktorSel = document.getElementById('doktorSelect');
+
+            function sifirla(sel, varsayilanMetin) {
+                sel.innerHTML = '<option value="">' + varsayilanMetin + '</option>';
+                sel.disabled = true;
+            }
+
+            hastaneSel.addEventListener('change', function () {
+                sifirla(doktorSel, '(Önce birim seçiniz)');
+                var hastaneId = this.value;
+                if (!hastaneId) {
+                    sifirla(birimSel, '(Önce hastane seçiniz)');
+                    return;
+                }
+                fetch('/api/birimler?hastaneId=' + hastaneId)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        birimSel.innerHTML = '<option value="">(İsteğe bağlı)</option>';
+                        data.forEach(function (b) {
+                            var opt = document.createElement('option');
+                            opt.value = b.id;
+                            opt.textContent = b.ad;
+                            birimSel.appendChild(opt);
+                        });
+                        birimSel.disabled = false;
+                    });
+            });
+
+            birimSel.addEventListener('change', function () {
+                var birimId = this.value;
+                if (!birimId) {
+                    sifirla(doktorSel, '(Önce birim seçiniz)');
+                    return;
+                }
+                fetch('/api/doktorlar?birimId=' + birimId)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        doktorSel.innerHTML = '<option value="">(İsteğe bağlı)</option>';
+                        data.forEach(function (d) {
+                            var opt = document.createElement('option');
+                            opt.value = d.id;
+                            opt.textContent = d.ad;
+                            doktorSel.appendChild(opt);
+                        });
+                        doktorSel.disabled = false;
+                    });
+            });
+        })();
+    </script>
 }
