@@ -78,7 +78,8 @@ public class DoldurModel : PageModel
             var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
             var kullaniciAjan = Request.Headers.UserAgent.ToString();
             await _anketDoldurmaServisi.YanitKaydetAsync(Girdi, ip, kullaniciAjan);
-            return RedirectToPage("Tesekkur", new { token });
+            TempData["AnketTamamlandi"] = true;
+            return RedirectToPage("/Index");
         }
         catch (Exception ex)
         {
