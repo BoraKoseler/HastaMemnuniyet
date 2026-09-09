@@ -33,15 +33,15 @@
 
             <div class="mb-3">
                 <label asp-for="Girdi.BirimId" class="form-label">Birim</label>
-                <select asp-for="Girdi.BirimId" class="form-select" id="birimSecim">
-                    <option value="">Birim seçiniz (isteğe bağlı)</option>
+                <select asp-for="Girdi.BirimId" class="form-select" id="birimSecim" disabled>
+                    <option value="">(Önce hastane seçiniz)</option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Girdi.DoktorId" class="form-label">Doktor</label>
-                <select asp-for="Girdi.DoktorId" class="form-select" id="doktorSecim">
-                    <option value="">Doktor seçiniz (isteğe bağlı)</option>
+                <select asp-for="Girdi.DoktorId" class="form-select" id="doktorSecim" disabled>
+                    <option value="">(Önce birim seçiniz)</option>
                 </select>
             </div>
 
@@ -72,4 +72,58 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Hastane -> Birim -> Doktor kademeli dropdown
+        (function () {
+            var hastaneSel = document.getElementById('hastaneSecim');
+            var birimSel = document.getElementById('birimSecim');
+            var doktorSel = document.getElementById('doktorSecim');
+
+            function sifirla(sel, varsayilanMetin) {
+                sel.innerHTML = '<option value="">' + varsayilanMetin + '</option>';
+                sel.disabled = true;
+            }
+
+            hastaneSel.addEventListener('change', function () {
+                sifirla(doktorSel, '(Önce birim seçiniz)');
+                var hastaneId = this.value;
+                if (!hastaneId) {
+                    sifirla(birimSel, '(Önce hastane seçiniz)');
+                    return;
+                }
+                fetch('/api/birimler?hastaneId=' + hastaneId)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        birimSel.innerHTML = '<option value="">(İsteğe bağlı)</option>';
+                        data.forEach(function (b) {
+                            var opt = document.createElement('option');
+                            opt.value = b.id;
+                            opt.textContent = b.ad;
+                            birimSel.appendChild(opt);
+                        });
+                        birimSel.disabled = false;
+                    });
+            });
+
+            birimSel.addEventListener('change', function () {
+                var birimId = this.value;
+                if (!birimId) {
+                    sifirla(doktorSel, '(Önce birim seçiniz)');
+                    return;
+                }
+                fetch('/api/doktorlar?birimId=' + birimId)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        doktorSel.innerHTML = '<option value="">(İsteğe bağlı)</option>';
+                        data.forEach(function (d) {
+                            var opt = document.createElement('option');
+                            opt.value = d.id;
+                            opt.textContent = d.ad;
+                            doktorSel.appendChild(opt);
+                        });
+                        doktorSel.disabled = false;
+                    });
+            });
+        })();
+    </script>
 }
