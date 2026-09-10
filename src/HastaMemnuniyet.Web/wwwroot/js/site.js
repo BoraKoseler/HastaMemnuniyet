@@ -6,7 +6,7 @@
     "use strict";
 
     document.addEventListener("DOMContentLoaded", function () {
-        cascadeDropdownBaslat();
+        //cascadeDropdownBaslat();
         soruTipiAlanlariBaslat();
         karakterSayaclariBaslat();
         secenekYonetimiBaslat();
@@ -15,7 +15,7 @@
     // --------------------------------------------------------
     // 1) Cascade dropdown (Davet oluşturma: hastane -> birim -> doktor)
     // --------------------------------------------------------
-    function cascadeDropdownBaslat() {
+    /*function cascadeDropdownBaslat() {
         const hastaneSecim = document.getElementById("hastaneSecim");
         const birimSecim = document.getElementById("birimSecim");
         const doktorSecim = document.getElementById("doktorSecim");
@@ -79,7 +79,7 @@
         opt.textContent = varsayilanMetin;
         secim.appendChild(opt);
     }
-
+    */
     // --------------------------------------------------------
     // 2) Soru tipi seçimine göre dinamik alan gösterme/gizleme
     //    (Anket soru yönetimi ekranı)
