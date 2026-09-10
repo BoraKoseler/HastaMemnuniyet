@@ -69,7 +69,7 @@ public class QrModel : PageModel
 
             await _qrKampanyaServisi.KullanimArtirAsync(id);
 
-            return RedirectToPage("Index", new { token = davet.Token });
+            return RedirectToPage("./Doldur", new { token = davet.Token });
         }
         catch (Exception ex)
         {
