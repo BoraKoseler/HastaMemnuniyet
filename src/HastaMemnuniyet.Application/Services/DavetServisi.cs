@@ -4,6 +4,7 @@ using HastaMemnuniyet.Application.Interfaces;
 using HastaMemnuniyet.Domain.Entities;
 using HastaMemnuniyet.Domain.Enums;
 using HastaMemnuniyet.Domain.Interfaces;
+using HastaMemnuniyet.Domain.Enums;
 
 namespace HastaMemnuniyet.Application.Services;
 
@@ -82,7 +83,10 @@ public class DavetServisi : IDavetServisi
         var gecerlilikSaati = await GecerlilikSaatiGetirAsync();
         var telefonHash = TelefonHashleyici.Hashle(dto.TelefonNumarasi);
 
-        await TekrarGonderimKontrolEtAsync(dto.AnketId, telefonHash);
+        if (dto.GonderimKanali != GonderimKanali.Qr && !string.IsNullOrWhiteSpace(dto.TelefonNumarasi))
+        {
+            await TekrarGonderimKontrolEtAsync(dto.AnketId, telefonHash);
+        }
 
         var davet = new AnketDaveti
         {
