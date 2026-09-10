@@ -1,17 +1,31 @@
 @page "{id:int}"
 @model HastaMemnuniyet.Web.Pages.Anket.QrModel
 @{
-    Layout = null;
     ViewData["Title"] = "Ankete Yönlendiriliyorsunuz";
+    Layout = "_AnketLayout";
 }
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-</head>
-<body>
-    <p>Ankete yönlendiriliyorsunuz, lütfen bekleyiniz...</p>
-</body>
-</html>
+
+@if (!string.IsNullOrEmpty(Model.HataMesaji))
+{
+    <div class="anket-kart text-center">
+        <div class="mb-3">
+            <i class="bi bi-exclamation-triangle-fill text-warning" style="font-size: 4rem;"></i>
+        </div>
+        <h1 class="h3 mb-3">Bir Sorun Oluştu</h1>
+        <p class="lead text-muted mb-2">@Model.HataMesaji</p>
+        <a href="/" class="btn btn-primary mt-3">
+            <i class="bi bi-house me-1"></i> Ana Sayfaya Dön
+        </a>
+    </div>
+}
+else
+{
+    <div class="anket-kart text-center">
+        <div class="mb-3">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Yükleniyor...</span>
+            </div>
+        </div>
+        <p class="lead text-muted">Ankete yönlendiriliyorsunuz, lütfen bekleyiniz...</p>
+    </div>
+}
