@@ -6,7 +6,7 @@
     "use strict";
 
     document.addEventListener("DOMContentLoaded", function () {
-        //cascadeDropdownBaslat();
+        cascadeDropdownBaslat();
         soruTipiAlanlariBaslat();
         karakterSayaclariBaslat();
         secenekYonetimiBaslat();
@@ -15,7 +15,7 @@
     // --------------------------------------------------------
     // 1) Cascade dropdown (Davet oluşturma: hastane -> birim -> doktor)
     // --------------------------------------------------------
-    /*function cascadeDropdownBaslat() {
+    function cascadeDropdownBaslat() {
         const hastaneSecim = document.getElementById("hastaneSecim");
         const birimSecim = document.getElementById("birimSecim");
         const doktorSecim = document.getElementById("doktorSecim");
@@ -37,18 +37,25 @@
                 const yanit = await fetch("/api/birimler?hastaneId=" + encodeURIComponent(hastaneId));
                 if (!yanit.ok) return;
                 const birimler = await yanit.json();
-                birimler.forEach(function (b) {
+                const tekil = [...new Map(birimler.map(b => [b.id, b])).values()];
+            tekil.forEach(function (b) {
+                const opt = document.createElement("option");
+                opt.value = b.id;
+                opt.textContent = b.ad;
+                birimSecim.appendChild(opt);
+            });
+                /*birimler.forEach(function (b) {
                     const opt = document.createElement("option");
                     opt.value = b.id;
                     opt.textContent = b.ad;
                     birimSecim.appendChild(opt);
-                });
+                });*/
             } catch (e) {
                 console.error("Birimler yüklenemedi", e);
             }
         });
 
-        if (birimSecim && doktorSecim) {
+        if (doktorSecim) {
             birimSecim.addEventListener("change", async function () {
                 const birimId = this.value;
                 temizleDropdown(doktorSecim, "Doktor seçiniz (isteğe bağlı)");
@@ -59,12 +66,19 @@
                     const yanit = await fetch("/api/doktorlar?birimId=" + encodeURIComponent(birimId));
                     if (!yanit.ok) return;
                     const doktorlar = await yanit.json();
-                    doktorlar.forEach(function (d) {
+                    const tekil = [...new Map(doktorlar.map(d => [d.id, d])).values()];
+                tekil.forEach(function (d) {
+                    const opt = document.createElement("option");
+                    opt.value = d.id;
+                    opt.textContent = d.ad;
+                    doktorSecim.appendChild(opt);
+                });
+                    /*doktorlar.forEach(function (d) {
                         const opt = document.createElement("option");
                         opt.value = d.id;
                         opt.textContent = d.ad;
                         doktorSecim.appendChild(opt);
-                    });
+                    });*/
                 } catch (e) {
                     console.error("Doktorlar yüklenemedi", e);
                 }
@@ -79,7 +93,7 @@
         opt.textContent = varsayilanMetin;
         secim.appendChild(opt);
     }
-    */
+    
     // --------------------------------------------------------
     // 2) Soru tipi seçimine göre dinamik alan gösterme/gizleme
     //    (Anket soru yönetimi ekranı)
