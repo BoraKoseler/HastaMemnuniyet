@@ -4,7 +4,6 @@ using HastaMemnuniyet.Application.Interfaces;
 using HastaMemnuniyet.Domain.Entities;
 using HastaMemnuniyet.Domain.Enums;
 using HastaMemnuniyet.Domain.Interfaces;
-using HastaMemnuniyet.Domain.Enums;
 
 namespace HastaMemnuniyet.Application.Services;
 

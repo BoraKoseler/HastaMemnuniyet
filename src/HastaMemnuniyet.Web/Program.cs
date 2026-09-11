@@ -26,11 +26,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Yonetim");
-    options.Conventions.AllowAnonymousPage("/Index");
-    options.Conventions.AllowAnonymousPage("/Hesap/Giris");
-    options.Conventions.AllowAnonymousPage("/Anket/Qr");
-    options.Conventions.AllowAnonymousPage("/Anket/Doldur");
-    options.Conventions.AllowAnonymousPage("/Error");
+    options.Conventions.AllowAnonymousToPage("/Index");
+    options.Conventions.AllowAnonymousToPage("/Hesap/Giris");
+    options.Conventions.AllowAnonymousToPage("/Anket/Qr");
+    options.Conventions.AllowAnonymousToPage("/Anket/Doldur");
+    options.Conventions.AllowAnonymousToPage("/Error");
 });
 
 builder.Services.AddAuthorization();
