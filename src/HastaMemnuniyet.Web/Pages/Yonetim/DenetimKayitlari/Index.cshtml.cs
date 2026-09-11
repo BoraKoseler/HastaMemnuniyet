@@ -46,7 +46,7 @@ public class IndexModel : PageModel
         }
         else
         {
-            Kayitlar = hamKayitlar.Where(k => NormalizeArama(k.IslemTuru).Contains(islemNorm)).ToList();
+            Kayitlar = hamKayitlar.Where(k => NormalizeArama(k.Islem).Contains(islemNorm)).ToList();
         }
     }
 
