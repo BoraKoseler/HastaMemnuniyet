@@ -28,23 +28,27 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var doktor in Model.Doktorlar)
+                    @foreach (var grup in Model.Doktorlar.GroupBy(d => d.Id).OrderBy(g => g.First().Ad))
                     {
+                        var doktor = grup.First();
+                        var birimler = grup.SelectMany(x => x.BirimAdlari).Distinct().OrderBy(x => x).ToList();
                         <tr>
                             <td>@doktor.Ad @doktor.Soyad</td>
                             <td>@(string.IsNullOrWhiteSpace(doktor.Unvan) ? "-" : doktor.Unvan)</td>
-                            <td>
-                                @if (doktor.BirimAdlari.Count == 0)
-                                {
-                                    <span class="text-muted">-</span>
-                                }
-                                else
-                                {
-                                    @foreach (var birimAdi in doktor.BirimAdlari)
+                            <td style="white-space: normal !important; min-width: 280px; max-width: 520px;">
+                                <div class="d-flex flex-wrap gap-1">
+                                    @if (birimler.Count == 0)
                                     {
-                                        <span class="badge bg-light text-dark border me-1 mb-1">@birimAdi</span>
+                                        <span class="text-muted">-</span>
                                     }
-                                }
+                                    else
+                                    {
+                                        @foreach (var birimAdi in birimler)
+                                        {
+                                            <span class="badge bg-light text-dark border fw-normal" style="white-space: normal; text-align: left;">@birimAdi</span>
+                                        }
+                                    }
+                                </div>
                             </td>
                             <td>
                                 @if (doktor.AktifMi)
