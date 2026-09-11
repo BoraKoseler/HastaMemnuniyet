@@ -38,7 +38,7 @@
                         case SoruTipi.Puanlama:
                             {
                                 var alt = soru.PuanlamaAltSinir ?? 1;
-                                var ust = soru.PuanlamaUstSinir ?? 5;
+                                var ust = soru.PuanlamaUstSinir ?? 10;
                                 <div class="puan-grup d-flex flex-wrap gap-2">
                                     @for (var p = alt; p <= ust; p++)
                                     {
