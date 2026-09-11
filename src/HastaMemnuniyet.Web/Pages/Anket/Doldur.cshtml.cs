@@ -110,6 +110,7 @@ public class DoldurModel : PageModel
     private static bool CevapVarMi(SoruTipi tip, AnketDoldurCevapDto cevap) => tip switch
     {
         SoruTipi.Puanlama => cevap.PuanDegeri.HasValue,
+        SoruTipi.Nps => cevap.PuanDegeri.HasValue,
         SoruTipi.TekSecim => cevap.SecenekId.HasValue,
         SoruTipi.CokluSecim => cevap.SeciliSecenekIdleri.Count > 0,
         SoruTipi.EvetHayir => cevap.BoolDegeri.HasValue,
