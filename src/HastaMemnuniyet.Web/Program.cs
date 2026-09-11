@@ -26,6 +26,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Yonetim");
+    options.Conventions.AllowAnonymousPage("/Index");
+    options.Conventions.AllowAnonymousPage("/Hesap/Giris");
+    options.Conventions.AllowAnonymousPage("/Anket/Qr");
+    options.Conventions.AllowAnonymousPage("/Anket/Doldur");
+    options.Conventions.AllowAnonymousPage("/Error");
 });
 
 builder.Services.AddAuthorization();
@@ -49,7 +54,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapGet("/", () => Results.Redirect("/Hesap/Giris"));
+app.MapGet("/", () => Results.Redirect("/tanitim"));
 
 // --- Cascade dropdown AJAX uç noktaları (davet oluşturma ekranı için) ---
 // Verilen hastaneye bağlı aktif birimleri JSON olarak döndürür.
