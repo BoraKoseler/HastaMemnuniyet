@@ -22,9 +22,8 @@
             @for (var i = 0; i < sorular.Count; i++)
             {
                 var soru = sorular[i];
-                <div class="anket-soru mb-4" data-soru-id="@soru.Id"
-                     data-kosul-soru-id="@soru.KosulBagliSoruId"
-                     data-kosul-degeri="@(soru.KosulBagliSoruId.HasValue ? soru.KosulDegeri : null)">
+                <div class="anket-soru mb-4" data-soru-id="@soru.Id" @if (soru.KosulBagliSoruId.HasValue) 
+                { <text> data-kosul-soru-id="@soru.KosulBagliSoruId" data-kosul-degeri="@soru.KosulDegeri" </text> }>
                     <input type="hidden" name="Girdi.Cevaplar[@i].SoruId" value="@soru.Id" />
                     <label class="form-label fw-semibold d-block mb-3">
                         @(i + 1). @soru.SoruMetni
@@ -145,7 +144,7 @@
     <script>
         // Koşullu soru görünürlüğü: bağlı sorunun cevabı beklenen değere eşit olduğunda soru gösterilir.
         (function () {
-            var kosulluSorular = Array.prototype.slice.call(document.querySelectorAll('[data-kosul-soru-id]'));
+            var kosulluSorular = Array.prototype.slice.call(document.querySelectorAll('.anket-soru[data-kosul-soru-id]:not([data-kosul-soru-id=""])'));
             if (kosulluSorular.length === 0) return;
 
             function soruDivBul(soruId) {
