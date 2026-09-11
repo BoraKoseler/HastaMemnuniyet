@@ -29,21 +29,21 @@
         <div class="row g-3">
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.HastaneId" class="form-label"></label>
-                <select asp-for="Girdi.HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select">
+                <select asp-for="Girdi.HastaneId" asp-items="Model.HastaneSecenekleri" class="form-select" id="hastaneSecim">
                     <option value="">Seçiniz...</option>
                 </select>
                 <span asp-validation-for="Girdi.HastaneId" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.BirimId" class="form-label"></label>
-                <select asp-for="Girdi.BirimId" asp-items="Model.BirimSecenekleri" class="form-select">
+                <select asp-for="Girdi.BirimId" asp-items="Model.BirimSecenekleri" class="form-select" id="birimSecim">
                     <option value="">(İsteğe bağlı)</option>
                 </select>
                 <span asp-validation-for="Girdi.BirimId" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Girdi.DoktorId" class="form-label"></label>
-                <select asp-for="Girdi.DoktorId" asp-items="Model.DoktorSecenekleri" class="form-select">
+                <select asp-for="Girdi.DoktorId" asp-items="Model.DoktorSecenekleri" class="form-select" id="doktorSecim">
                     <option value="">(İsteğe bağlı)</option>
                 </select>
                 <span asp-validation-for="Girdi.DoktorId" class="text-danger"></span>
