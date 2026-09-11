@@ -30,6 +30,9 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/Hesap/Giris");
     options.Conventions.AllowAnonymousToPage("/Anket/Qr");
     options.Conventions.AllowAnonymousToPage("/Anket/Doldur");
+    options.Conventions.AllowAnonymousToPage("/Anket/Tesekkur");
+    options.Conventions.AllowAnonymousToPage("/Anket/SuresiDolmus");
+    options.Conventions.AllowAnonymousToPage("/Hesap/YetkisizErisim");
     options.Conventions.AllowAnonymousToPage("/Error");
 });
 
