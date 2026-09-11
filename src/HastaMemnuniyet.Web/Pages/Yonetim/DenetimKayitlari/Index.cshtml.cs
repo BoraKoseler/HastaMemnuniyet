@@ -37,6 +37,29 @@ public class IndexModel : PageModel
     /// <returns>Sayfa sonucu.</returns>
     public async Task OnGetAsync()
     {
-        Kayitlar = await _denetimServisi.SonKayitlariGetirAsync(200, Islem, KullaniciAdi);
+        var hamKayitlar = await _denetimServisi.SonKayitlariGetirAsync(200, null, KullaniciAdi);
+
+        var islemNorm = NormalizeArama(Islem);
+        if (string.IsNullOrEmpty(islemNorm))
+        {
+            Kayitlar = hamKayitlar;
+        }
+        else
+        {
+            Kayitlar = hamKayitlar.Where(k => NormalizeArama(k.IslemTuru).Contains(islemNorm)).ToList();
+        }
+    }
+
+    private static string NormalizeArama(string? deger)
+    {
+        if (string.IsNullOrWhiteSpace(deger))
+        {
+            return string.Empty;
+        }
+
+        deger = deger.ToLowerInvariant().Trim();
+        deger = deger.Replace('ç', 'c').Replace('ğ', 'g').Replace('ö', 'o').Replace('ş', 's').Replace('ü', 'u');
+        deger = deger.Replace('ı', 'i').Replace('İ', 'i');
+        return deger;
     }
 }
